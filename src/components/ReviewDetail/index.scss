@@ -1,0 +1,17 @@
+.review-detail-img {
+  width: 100%;
+  padding-top: 56.25%;
+  position: relative;
+ .review-detail-img__container{
+    position:  absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    object-fit: cover;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+ } 
+}
