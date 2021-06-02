@@ -3,10 +3,13 @@ import "./index.scss";
 import bg1 from "../../assets/images/bg-1.jpg";
 import bg2 from "../../assets/images/bg-2.jpg";
 import bg3 from "../../assets/images/bg-3.jpg";
+import ReviewDetail from "../../components/ReviewDetail/ReviewDetail";
 
 export default function Home() {
   return (
     <home>
+
+      {/* Carousel */}
       <div
         id="carouselExampleIndicators"
         className="carousel slide"
@@ -75,6 +78,30 @@ export default function Home() {
           ></span>
           <span className="visually-hidden">Next</span>
         </button>
+      </div>
+
+
+      {/* New review */}
+      <div className="container my-5 overflow-hidden">
+
+        <div className="new-review-list__header fs-1 text-center my-3">
+          New reivew
+        </div>
+
+        <div className="new-review-list row row-cols-1 gx-5 row-cols-lg-4">
+          <div className="col">
+            <ReviewDetail />
+          </div>
+          <div className="col">
+            <ReviewDetail />
+          </div>
+          <div className="col">
+            <ReviewDetail />
+          </div>
+          <div className="col">
+            <ReviewDetail />
+          </div>
+        </div>
       </div>
     </home>
   );
