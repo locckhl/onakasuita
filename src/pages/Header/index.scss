@@ -1,0 +1,25 @@
+$header-height: 80px;
+
+header {
+  height: $header-height;
+  .header-content {
+    line-height: $header-height;
+    .header-navbar {
+      ul {
+        li {
+          list-style: none;
+          display: block;
+          padding: 0 1.7rem 0 1.7rem;
+          a {
+            text-decoration: none;
+            display: block;
+            color: #212529;
+          }
+          a:hover{
+              text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

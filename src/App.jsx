@@ -22,9 +22,9 @@ function App() {
           <Home />
         </Route>
 
-        <Route exact path="/signin">
+        {/* <Route exact path="/signin">
           <SignIn />
-        </Route>
+        </Route> */}
 
         <Route exact path="/admin">
           <Admin />
