@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 import nano from "../../assets/images/nano.jpg";
-import ReviewDetail from "../../components/ReviewDetail/ReviewDetail";
+import ReviewItem from "../../components/ReviewItem/ReviewItem";
 import UserEdit from "../../components/UserEdit/UserEdit";
 
 export default function UserProfile() {
@@ -40,16 +40,16 @@ export default function UserProfile() {
 
           <div className="new-review-list row row-cols-1 gx-5 row-cols-lg-4">
             <div className="col">
-              <ReviewDetail />
+              <ReviewItem />
             </div>
             <div className="col">
-              <ReviewDetail />
+              <ReviewItem />
             </div>
             <div className="col">
-              <ReviewDetail />
+              <ReviewItem />
             </div>
             <div className="col">
-              <ReviewDetail />
+              <ReviewItem />
             </div>
           </div>
         </div>

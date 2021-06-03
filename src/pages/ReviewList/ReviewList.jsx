@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.scss";
-import ReviewDetail from "../../components/ReviewDetail/ReviewDetail";
+import ReviewItem from "../../components/ReviewItem/ReviewItem";
 export default function ReviewList() {
   return (
     <div className="container my-5 overflow-hidden">
@@ -28,19 +28,19 @@ export default function ReviewList() {
 
       <div className="new-review-list row row-cols-1 gx-5 row-cols-lg-4 justify-content-center ">
         <div className="col py-4">
-          <ReviewDetail />
+          <ReviewItem />
         </div>
         <div className="col py-4">
-          <ReviewDetail />
+          <ReviewItem />
         </div>
         <div className="col py-4">
-          <ReviewDetail />
+          <ReviewItem />
         </div>
         <div className="col py-4">
-          <ReviewDetail />
+          <ReviewItem />
         </div>
         <div className="col py-4">
-          <ReviewDetail />
+          <ReviewItem />
         </div>
       </div>
     </div>

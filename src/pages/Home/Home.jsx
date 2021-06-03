@@ -3,7 +3,7 @@ import "./index.scss";
 import bg1 from "../../assets/images/bg-1.jpg";
 import bg2 from "../../assets/images/bg-2.jpg";
 import bg3 from "../../assets/images/bg-3.jpg";
-import ReviewDetail from "../../components/ReviewDetail/ReviewDetail";
+import ReviewItem from "../../components/ReviewItem/ReviewItem";
 
 export default function Home() {
   return (
@@ -90,16 +90,16 @@ export default function Home() {
 
         <div className="new-review-list row row-cols-1 gx-5 row-cols-lg-4">
           <div className="col">
-            <ReviewDetail />
+            <ReviewItem />
           </div>
           <div className="col">
-            <ReviewDetail />
+            <ReviewItem />
           </div>
           <div className="col">
-            <ReviewDetail />
+            <ReviewItem />
           </div>
           <div className="col">
-            <ReviewDetail />
+            <ReviewItem />
           </div>
         </div>
       </div>
