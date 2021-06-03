@@ -1,0 +1,32 @@
+.filter-element {
+  display: inline;
+  position: relative;
+  padding-right: 25px !important;
+}
+.filter-element::before,
+.filter-element::after {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  right: 4px;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  cursor: pointer;
+}
+.filter-element:before {
+  border-top: 7px solid #000;
+  bottom: 0;
+}
+.filter-element:after {
+  border-bottom: 7px solid #000;
+  border-top: 7px solid transparent;
+  top: 0;
+}
+
+.asc::before {
+  opacity: 0.2;
+}
+.desc::after {
+  opacity: 0.2;
+}
