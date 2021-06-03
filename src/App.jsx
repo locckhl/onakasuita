@@ -11,6 +11,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import NewReview from "./pages/NewReview/NewReview";
 import ReviewList from "./pages/ReviewList/ReviewList";
 import ReviewDetail from "./pages/ReviewDetail/ReviewDetail";
+import Test from "./lib/api/Test";
 
 function App() {
   return (
@@ -46,6 +47,9 @@ function App() {
           <ReviewDetail />
         </Route>
 
+        <Route exact path="/test-api">
+          <Test />
+        </Route>
       </Switch>
 
       <Footer></Footer>
