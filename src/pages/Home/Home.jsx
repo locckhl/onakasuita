@@ -7,7 +7,7 @@ import ReviewDetail from "../../components/ReviewDetail/ReviewDetail";
 
 export default function Home() {
   return (
-    <home>
+    <home className="my-5">
 
       {/* Carousel */}
       <div

@@ -11,7 +11,7 @@ export default function Header() {
           <div className="col-1 header-logo">
             <img src={logo} alt="" />
           </div>
-          <div className="col-9 header-navbar ">
+          <div className="col-8 header-navbar ">
             <ul className="d-flex justify-content-start fs-5">
               <li>
                 <a href="/">HOME</a>
@@ -27,8 +27,19 @@ export default function Header() {
               </li>
             </ul>
           </div>
-          <div className="col-2 header-user">
-            <SignIn/>
+          <div className="col-3 header-user">
+            <div className="row">
+              <div className="col">
+                <a href="/admin">
+                  {/* Or user profile */}
+                  <span>Welcome admin</span> 
+                </a>
+              </div>
+              <div className="col">
+                <SignIn />
+                {/* <div className="btn btn-primary">Sign out</div> */}
+              </div>
+            </div>
           </div>
         </div>
       </div>
