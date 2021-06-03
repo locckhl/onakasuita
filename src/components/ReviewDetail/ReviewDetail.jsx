@@ -11,9 +11,10 @@ export default function ReviewDetail() {
                 </a>
             </div>
             <div className="review-detail-text">
-                <div className="review-detail-text__header">Sushi</div>
+                <div className="review-detail-text__header fs-4">Sushi</div>
                 <div className="review-detail-text__body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua <a href="/review-detail">More</a></div>
-                <div className="review-detail-text__time">May 7, 2021</div>
+                <div className="review-detail-text__comment">5 comments</div>
+                <div className="review-detail-text__time text-center">May 7, 2021</div>
             </div>
         </div>
     )

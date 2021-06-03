@@ -1,0 +1,15 @@
+.admin-table {
+  tbody {
+    // background-color: red;
+
+    tr {
+      td:nth-last-child(1) {
+        text-align: center;
+        width: 50px;
+        cursor: pointer;
+        // background-color: red;
+      }
+    }
+  }
+
+}
