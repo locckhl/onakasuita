@@ -12,11 +12,28 @@ import NewReview from "./pages/NewReview/NewReview";
 import ReviewList from "./pages/ReviewList/ReviewList";
 import ReviewDetail from "./pages/ReviewDetail/ReviewDetail";
 import Test from "./lib/api/Test";
+import { auth, storeUserInfo } from "./lib/api/user";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState([]);
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      let newUser = null;
+      if (user) {
+        newUser = await storeUserInfo(user);
+      }
+      setCurrentUser(newUser);
+    });
+  }, []);
+
+  const logout = () => {
+    auth.signOut();
+  };
+
   return (
     <Router>
-      <Header></Header>
+      <Header currentUser={currentUser}></Header>
 
       <Switch>
         <Route exact path="/">

@@ -3,7 +3,7 @@ import "./index.scss";
 import logo from "../../logo.svg";
 import { Modal, Button } from "react-bootstrap";
 import SignIn from "../../components/SignIn/SignIn";
-export default function Header() {
+export default function Header({ currentUser }) {
   return (
     <header>
       <div className="container-fluid">
@@ -32,11 +32,11 @@ export default function Header() {
               <div className="col">
                 <a href="/admin">
                   {/* Or user profile */}
-                  <span>Welcome admin</span> 
+                  <span>Welcome admin</span>
                 </a>
               </div>
               <div className="col">
-                <SignIn />
+                <SignIn currentUser={currentUser} />
                 {/* <div className="btn btn-primary">Sign out</div> */}
               </div>
             </div>
