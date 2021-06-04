@@ -1,10 +1,33 @@
-# Getting Started with Create React App
+# Onakasuita
+
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## About this project
+This project is built as well as a platform to share everybody's knowledge about food and ... food.
 
-In the project directory, you can run:
+
+## How to clone
+
+Follow the following steps to clone this project: ❤❤
+
+
+* Using https: `git clone https://github.com/locckhl/onakasuita.git` 
+* Using ssh: `git@github.com/locckhl/onakasuita.git`
+* Using Github CLI: `gh repo clone locckhl/onakasuita`
+
+## Development rules
+* Check out new branch: `git checkout -b {branch_name} ` 
+* Install node_modules (packages): `yarn install --check-files`
+* Start server with: `yarn start`
+* The project is running at: http://localhost:3000/
+* <span style="color:red">Note:</span>
+    * Do not modify anything in **main** branch, you have to checkout your own branch
+    * Just modify only files **related to your task**, try not to modify **other files**
+
+
+## React useful information
 
 ### `yarn start`
 
