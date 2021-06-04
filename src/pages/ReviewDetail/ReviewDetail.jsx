@@ -1,5 +1,5 @@
 import React from "react";
-import CommentItem from "../../components/CommentItem/CommentItem";
+import CommentList from "../../components/CommentList/CommentList";
 import "./index.scss";
 import avatar from "../../assets/images/nano.jpg";
 
@@ -57,12 +57,10 @@ export default function ReviewDetail() {
         Sleeve and Kids Backpack (SWA). The complete list of giveaways can be
         found here.
       </div>
-      <div className="review-comments">
-        <div className="fs-3 mb-4 ">05 Comments</div>
-        <CommentItem />
-        <CommentItem />
-        <CommentItem />
+      <div className="review-comments-container">
+       <CommentList />
       </div>
+      
       <div className="comment-form">
         <div className="fs-4">Leave a comment</div>
         <div class="input-group mb-4">

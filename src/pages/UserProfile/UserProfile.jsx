@@ -3,6 +3,7 @@ import "./index.scss";
 import nano from "../../assets/images/nano.jpg";
 import ReviewItem from "../../components/ReviewItem/ReviewItem";
 import UserEdit from "../../components/UserEdit/UserEdit";
+import ReviewItemList from "../../components/ReviewItemList/ReviewItemList";
 
 export default function UserProfile() {
   return (
@@ -38,19 +39,8 @@ export default function UserProfile() {
             Reviewed Posts
           </div>
 
-          <div className="new-review-list row row-cols-1 gx-5 row-cols-lg-4">
-            <div className="col">
-              <ReviewItem />
-            </div>
-            <div className="col">
-              <ReviewItem />
-            </div>
-            <div className="col">
-              <ReviewItem />
-            </div>
-            <div className="col">
-              <ReviewItem />
-            </div>
+          <div className="review-item-list-container">
+            <ReviewItemList/>
           </div>
         </div>
       </div>

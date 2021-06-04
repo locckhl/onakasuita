@@ -4,11 +4,11 @@ import bg1 from "../../assets/images/bg-1.jpg";
 import bg2 from "../../assets/images/bg-2.jpg";
 import bg3 from "../../assets/images/bg-3.jpg";
 import ReviewItem from "../../components/ReviewItem/ReviewItem";
+import ReviewItemList from "../../components/ReviewItemList/ReviewItemList";
 
 export default function Home() {
   return (
     <home className="my-5">
-
       {/* Carousel */}
       <div
         id="carouselExampleIndicators"
@@ -80,27 +80,14 @@ export default function Home() {
         </button>
       </div>
 
-
       {/* New review */}
       <div className="container my-5 overflow-hidden">
-
         <div className="new-review-list__header fs-1 text-center my-3">
           New reivew
         </div>
 
-        <div className="new-review-list row row-cols-1 gx-5 row-cols-lg-4">
-          <div className="col">
-            <ReviewItem />
-          </div>
-          <div className="col">
-            <ReviewItem />
-          </div>
-          <div className="col">
-            <ReviewItem />
-          </div>
-          <div className="col">
-            <ReviewItem />
-          </div>
+        <div className="review-item-list-container">
+          <ReviewItemList />
         </div>
       </div>
     </home>
