@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { getReviews, createReview } from "./reviews";
+import db, { firebase } from "./firebase";
+import {
+  getReviews,
+  createReview,
+  getReviewById,
+  deleteReview,
+} from "./reviews";
 
 export default function Test() {
   const [data, setData] = useState(null);
+  const [item, setItem] = useState('');
+  const [deleteItem, setDeleteItem] = useState(null);
   const fetchData = async () => {
     try {
       const res = await getReviews();
+      console.log("res", res);
       setData(res);
+
+      const itemById = await getReviewById("0wUjF3z06DMoJR4TC4zn");
+      setItem(itemById);
     } catch (err) {
       throw err;
     }
@@ -19,8 +31,9 @@ export default function Test() {
   const HandleSubmit = async () => {
     try {
       await createReview({
-        title: "banh my",
-        content: "bla bla",
+        title: "pho",
+        content: "ga",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
       alert("Sucess roi");
     } catch (err) {
@@ -28,12 +41,35 @@ export default function Test() {
     }
   };
 
+  const handleGetItemByid = async () => {
+    try {
+      const res = await getReviewById(item);
+
+      alert("item title: " + res.title);
+      console.log(res)
+    } catch (error) {
+      alert("get review by id fail");
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteReview(deleteItem);
+
+      alert("Delete ok");
+    } catch (error) {
+      alert("Delete fail");
+    }
+  };
+
   if (!data) return "loading";
+
   return (
     <div>
-      {data.map((item, index) => (
+      {data.map((item) => (
         <div>
-          {index + 1}. title:{item.title}, content:{item.content}
+          ID:{item.id}, Date: {item.createdAt.seconds}, title:{item.title},
+          content:{item.content}
           <br />
           <br />
         </div>
@@ -47,7 +83,7 @@ export default function Test() {
           fetchData();
         }}
       >
-        Fetch data
+        Fetch review list
       </button>
       <button
         className="btn btn-primary"
@@ -56,7 +92,41 @@ export default function Test() {
           HandleSubmit();
         }}
       >
-        Post data
+        Post review
+      </button>
+      <br />
+      {/* Get review by id */}
+      <input
+        type="text"
+        onChange={(e) => {
+          setItem(e.target.value);
+        }}
+      />
+      <button
+        className="btn btn-primary"
+        onClick={(e) => {
+          e.preventDefault();
+          handleGetItemByid();
+        }}
+      >
+        Get review by id
+      </button>
+      <br />
+      {/* Delete */}
+      <input
+        type="text"
+        onChange={(e) => {
+          setDeleteItem(e.target.value);
+        }}
+      />
+      <button
+        className="btn btn-primary"
+        onClick={(e) => {
+          e.preventDefault();
+          handleDelete();
+        }}
+      >
+        Delete review
       </button>
     </div>
   );
