@@ -14,7 +14,6 @@ const getReviews = async () => {
   }
 };
 
-
 const getReviewById = async (id) => {
   try {
     const item = await db.doc(`reviews/${id}`).get();
@@ -24,10 +23,28 @@ const getReviewById = async (id) => {
     throw err;
   }
 };
-
-const createReview = async ({ title, content, createdAt }) => {
+const getReviewComments = async (id) => {
   try {
-    const status = await db.collection("reviews").add({ title, content, createdAt });
+    const snapshot = await db
+      .collection(`comments`)
+      .where("reviewId", "==", id)
+      .get();
+
+    const items = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    // console.log(items);
+    if (items.length === 0) {
+      throw new Error("No such document!");
+    }
+    return items;
+  } catch (err) {
+    throw err;
+  }
+};
+const createReview = async ({ title, content, createdAt, userId }) => {
+  try {
+    const status = await db
+      .collection("reviews")
+      .add({ title, content, createdAt, userId });
     console.log(status);
   } catch (err) {
     throw err;
@@ -36,12 +53,17 @@ const createReview = async ({ title, content, createdAt }) => {
 
 const deleteReview = async (id) => {
   try {
-
-    const status = await db.doc(`reviews/${id}`).delete()
+    const status = await db.doc(`reviews/${id}`).delete();
     console.log("status", status);
   } catch (err) {
     throw err;
   }
 };
 
-export { getReviews, getReviewById, createReview, deleteReview  };
+export {
+  getReviews,
+  getReviewById,
+  getReviewComments,
+  createReview,
+  deleteReview,
+};
