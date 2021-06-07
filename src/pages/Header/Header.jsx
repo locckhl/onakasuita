@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.scss";
-import logo from "../../logo.svg";
+import logo from "../../assets/images/logo2.png";
 import { Modal, Button } from "react-bootstrap";
 import SignIn from "../../components/SignIn/SignIn";
 export default function Header({ currentUser }) {
@@ -9,23 +9,27 @@ export default function Header({ currentUser }) {
       <div className="container-fluid">
         <div className="row align-middle header-content">
           <div className="col-1 header-logo">
-            <img src={logo} alt="" />
+            <div>
+              <a href="/">
+                  <img src={logo} alt="" />
+              </a>
+            </div>
           </div>
           <div className="col-8 header-navbar ">
-            <ul className="d-flex justify-content-start fs-5">
-              <li>
+            <dl className="d-flex justify-content-start fs-5">
+              <dd>
                 <a href="/">HOME</a>
-              </li>
-              <li>
+              </dd>
+              <dd>
                 <a href="/review-list">REVIEW LIST</a>
-              </li>
-              <li>
+              </dd>
+              <dd>
                 <a href="/new-review">CREATE REVIEW</a>
-              </li>
-              <li>
+              </dd>
+              <dd>
                 <a href="#">CONTACT US</a>
-              </li>
-            </ul>
+              </dd>
+            </dl>
           </div>
           <div className="col-3 header-user">
             <div className="row">
