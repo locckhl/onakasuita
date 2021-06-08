@@ -113,7 +113,20 @@ const unBlockUser = async (id) => {
     return false;
   }
 };
+const getAllUser = async () => {
+  try {
+    const data = await db.collection("users").get();
+    const items = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    return items;
+  } catch (err) {
+    return [];
+  }
+}
 
+const deleteUser = async (value) => {
+  const data = await db.collection("users").doc(value.id);
+  await data.delete()
+};
 const auth = firebase.auth();
 export {
   uiConfig,
@@ -124,5 +137,7 @@ export {
   getUserById,
   getUserReviews,
   getUserComments,
+  getAllUser,
+  deleteUser,
   auth,
 };

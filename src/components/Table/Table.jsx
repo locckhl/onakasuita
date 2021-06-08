@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
+import {getAllUser,deleteUser, blockUser, unBlockUser} from "../../lib/api/user"
 
 export default function Table() {
+  const [ listUser, setListUser ]= useState([])
+  useEffect(async() => {
+    let follow = await getAllUser() || [];
+    setListUser(follow)
+    console.log(follow);
+  }, [listUser.length])
+
+  // console.log(listUser);
   return (
     <div>
       <div className="text-center fs-3 mb-3">
-        <span>User</span>
+        <span>User Table</span>
       </div>
 
       {/* table content */}
@@ -13,52 +22,32 @@ export default function Table() {
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-            <th scope="col">View</th>
-            <th scope="col">Delete</th>
+            <th scope="col">UserName</th>
+            <th scope="col">Phone</th>
+            <th scope="col">View Profile</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td><a href="user-profile">profile</a></td>
-            <td>
-              {" "}
-              <a >
-                <i class="fas fa-trash"></i>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td><a href="user-profile">profile</a></td>
-            <td>
-              {" "}
-              <a >
-                <i class="fas fa-trash"></i>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-            <td><a href="user-profile">profile</a></td>
-            <td>
-              {" "}
-              <a >
-                <i class="fas fa-trash"></i>
-              </a>
-            </td>
-          </tr>
+          {listUser.map((value)=>{
+            let link =`user-profile/${value.id}`
+            return (
+            <tr>
+              <th scope="row">{value.id}</th>
+              <td>{value.username}</td>
+              <td>{value.phone}</td>
+              <td><a href={link}><i class="fas fa-eye"></i></a></td>
+              <td>
+                <a class="text-center">
+                  {value.block ? (
+                    <i class="fas fa-play-circle" onClick={()=>blockUser(value.id)}> </i>
+                  ) : (
+                    <i class="fas fa-stop-circle" onClick={()=>unBlockUser(value.id)}> </i>
+                  )}
+                </a>
+              </td>
+            </tr>)
+          })}
         </tbody>
       </table>
     </div>

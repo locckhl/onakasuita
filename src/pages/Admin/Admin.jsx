@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Table from "../../components/Table/Table";
+import ReviewList from "../../components/ReviewItemList/ReviewItemList"
+import CommentList from "../../components/CommentList/CommentList"
 import "./index.scss";
+import { getAllUser, } from '../../lib/api/user'
+import { getReviews} from '../../lib/api/reviews'
+import { getComments} from '../../lib/api/comment'
 export default function Admin() {
   const [activeTab, setActiveTab] = useState(1);
-
+  const [ listUser, setListUser ]= useState([]);
+  const [ listReview, setListReview ]= useState([]);
+  const [ listComment, setListComment ]= useState([]);
+  useEffect(async() => {
+    let follow = await getAllUser() || [];
+    setListUser(follow)
+    follow = await getReviews()||[]
+    setListReview(follow)
+    follow = await getComments()||[]
+    setListComment(follow)
+  }, [listUser.length])
   const handleChangeActiveTab = (tab) => {
     setActiveTab(tab);
   };
@@ -104,7 +119,7 @@ export default function Admin() {
                   <div className=" dashboard-item__content ">
                     <div className="row flex-column">
                       <div className="col ">User</div>
-                      <div className="col fs-2">1.7M</div>
+                      <div className="col fs-2">{listUser.length}</div>
                     </div>
                   </div>
                 </div>
@@ -124,7 +139,7 @@ export default function Admin() {
                   <div className=" dashboard-item__content ">
                     <div className="row flex-column">
                       <div className="col ">Reviews</div>
-                      <div className="col fs-2">1.7M</div>
+                      <div className="col fs-2">{listReview.length}</div>
                     </div>
                   </div>
                 </div>
@@ -144,7 +159,7 @@ export default function Admin() {
                   <div className=" dashboard-item__content ">
                     <div className="row flex-column">
                       <div className="col ">Comments</div>
-                      <div className="col fs-2">1.7M</div>
+                      <div className="col fs-2">{listComment.length}</div>
                     </div>
                   </div>
                 </div>
@@ -155,10 +170,10 @@ export default function Admin() {
             <Table />
           </div>
           <div className={activeTab === 3 ? "d-block" : "d-none"} id="tab-3">
-            3
+            <ReviewList />
           </div>
           <div className={activeTab === 4 ? "d-block" : "d-none"} id="tab-4">
-            4
+            <CommentList />
           </div>
         </div>
       </div>

@@ -48,7 +48,7 @@ function App() {
           <Admin />
         </Route>
 
-        <Route exact path="/user-profile">
+        <Route exact path="/user-profile/:id">
           <UserProfile />
         </Route>
 
