@@ -35,39 +35,41 @@ function App() {
     <Router>
       <Header currentUser={currentUser}></Header>
 
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
+      <div className="main-content">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
 
-        {/* <Route exact path="/signin">
+          {/* <Route exact path="/signin">
           <SignIn />
         </Route> */}
 
-        <Route exact path="/admin">
-          <Admin />
-        </Route>
+          <Route exact path="/admin">
+            <Admin />
+          </Route>
 
-        <Route exact path="/user-profile">
-          <UserProfile />
-        </Route>
+          <Route exact path="/user-profile">
+            <UserProfile />
+          </Route>
 
-        <Route exact path="/new-review">
-          <NewReview />
-        </Route>
+          <Route exact path="/new-review">
+            <NewReview />
+          </Route>
 
-        <Route exact path="/review-list">
-          <ReviewList />
-        </Route>
+          <Route exact path="/review-list">
+            <ReviewList />
+          </Route>
 
-        <Route exact path="/review-detail">
-          <ReviewDetail />
-        </Route>
+          <Route exact path="/review-detail">
+            <ReviewDetail />
+          </Route>
 
-        <Route exact path="/test-api">
-          <Test />
-        </Route>
-      </Switch>
+          <Route exact path="/test-api">
+            <Test />
+          </Route>
+        </Switch>
+      </div>
 
       <Footer></Footer>
     </Router>
