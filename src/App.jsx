@@ -1,11 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./pages/Header/Header";
 import Footer from "./pages/Footer/Footer";
 import Home from "./pages/Home/Home";
-import SignIn from "./pages/SignIn/SignIn";
 import Admin from "./pages/Admin/Admin";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import NewReview from "./pages/NewReview/NewReview";
@@ -49,7 +47,7 @@ function App() {
             <Admin />
           </Route>
 
-          <Route exact path="/user-profile">
+          <Route exact path="/user-profile/:id">
             <UserProfile />
           </Route>
 

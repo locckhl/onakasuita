@@ -28,7 +28,7 @@ export default function Header({}) {
               </a>
             </div>
           </div>
-          <div className="col-8 header-navbar ">
+          <div className="col-7 header-navbar ">
             <dl className="d-flex justify-content-start fs-5">
               <dd>
                 <a href="/">HOME</a>
@@ -44,9 +44,9 @@ export default function Header({}) {
               </dd>
             </dl>
           </div>
-          <div className="col-3 header-user">
-            <div className="row">
-              <div className="col">
+          <div className="col-4 header-user">
+            <div className="d-flex justify-content-end ">
+              <div className="me-4">
                 {currentUser ? (
                   currentUser.admin ? (
                     <a href="/admin">
@@ -61,7 +61,7 @@ export default function Header({}) {
                   ""
                 )}
               </div>
-              <div className="col">
+              <div className="me-4">
                 <SignIn currentUser={currentUser} />
                 {/* <div className="btn btn-primary">Sign out</div> */}
               </div>
