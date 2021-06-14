@@ -24,9 +24,9 @@ const getUserReviews = async (id) => {
       .where("userId", "==", id)
       .get();
     const items = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    if (items.length === 0) {
-      throw new Error("No such user!");
-    }
+    // if (items.length === 0) {
+    //   throw new Error("No such user!");
+    // }
     return items;
   } catch (err) {
     throw err;
@@ -40,9 +40,9 @@ const getUserComments = async (id) => {
       .where("userId", "==", id)
       .get();
     const items = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    if (items.length === 0) {
-      throw new Error("No such user!");
-    }
+    // if (items.length === 0) {
+    //   throw new Error("No such user!");
+    // }
     return items;
   } catch (err) {
     throw err;
@@ -53,7 +53,7 @@ const storeUserInfo = async (user) => {
   const { uid } = user;
   const userDoc = await db.collection("users").doc(uid).get();
   if (!userDoc.exists) {
-    await db.collection("users").doc(uid).set({ username: user.displayName });
+    await db.collection("users").doc(uid).set({ username: user.displayName, email: user.email, id: user.uid });
     return {
       username: user.displayName,
       id: uid,
@@ -66,14 +66,15 @@ const storeUserInfo = async (user) => {
   }
 };
 
-const updateUser = async ({ id, avatar, phone }) => {
+const updateUser = async ({ id, avatar, phone, username }) => {
   try {
     const userDoc = await db.collection("users").doc(id).get();
+    console.log("userdoc", userDoc);
     if (userDoc.exists) {
       await db
         .collection("users")
         .doc(id)
-        .update({ ...userDoc.data(), avatar, phone });
+        .update({ ...userDoc.data(), avatar, phone, username });
     }
     return true;
   } catch (err) {
@@ -85,6 +86,7 @@ const updateUser = async ({ id, avatar, phone }) => {
 const blockUser = async (id) => {
   try {
     const userDoc = await db.collection("users").doc(id).get();
+    console.log("userdoc", userDoc);
     if (userDoc.exists) {
       await db
         .collection("users")
@@ -114,6 +116,18 @@ const unBlockUser = async (id) => {
   }
 };
 
+const uploadImage = async (image) => {
+  const ref = firebase.storage().ref().child(`/images/${image.name}`);
+  let downloadUrl = "";
+  try {
+    await ref.put(image);
+    downloadUrl = await ref.getDownloadURL();
+  } catch (err) {
+    console.log(err);
+  }
+  return downloadUrl;
+};
+
 const auth = firebase.auth();
 export {
   uiConfig,
@@ -124,5 +138,6 @@ export {
   getUserById,
   getUserReviews,
   getUserComments,
+  uploadImage,
   auth,
 };

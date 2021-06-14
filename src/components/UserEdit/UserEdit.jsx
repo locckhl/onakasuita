@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { updateUser, uploadImage } from "../../lib/api/user";
+import "./index.scss"
 
-export default function UserEdit() {
+export default function UserEdit({ user }) {
   const [show, setShow] = useState(false);
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+  const [phone, setPhone] = useState(user.phone);
+  const [avatar, setAvatar] = useState(user.avatar);
+  const avatarInput = useRef()
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleUpdate = async () => {
+    console.log("id",avatarInput.current.files[0]);
+
+    const downloadURL = await uploadImage(avatarInput.current.files[0])
+    const userRes = await updateUser({ id: user.id, avatar:downloadURL, phone, username });
+    
+  };
   return (
     <div>
       <Button variant="primary" onClick={handleShow}>
@@ -27,6 +41,10 @@ export default function UserEdit() {
               placeholder="User Name"
               aria-label="username"
               aria-describedby="basic-addon1"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
             />
           </div>
 
@@ -40,12 +58,17 @@ export default function UserEdit() {
               placeholder="Email"
               aria-label="email"
               aria-describedby="basic-addon1"
+              disabled
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </div>
 
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
-            📱
+              📱
             </span>
             <input
               type="text"
@@ -53,14 +76,24 @@ export default function UserEdit() {
               placeholder="Phone"
               aria-label="phone"
               aria-describedby="basic-addon1"
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
             />
           </div>
+
+          <label for="avatar_image" class="custom-file-upload btn btn-primary">
+            <i class="fa fa-cloud-upload"></i> Upload avatar
+          </label>
+          <input type="file" id="avatar_image" ref={avatarInput}/>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleUpdate}>
             Update
           </Button>
         </Modal.Footer>
