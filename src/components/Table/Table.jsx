@@ -8,7 +8,7 @@ export default function Table(props) {
   const [ listUser, setListUser ]= useState([])
   const [ listReview, setListReview ]= useState([])
   const [ listComment, setListComment ]= useState([])
-  let userR
+
   useEffect(async() => {
     let follow = await getAllUser() || [];
     setListUser(follow)
@@ -17,6 +17,22 @@ export default function Table(props) {
     follow = await getComments() || [];
     setListComment(follow)
   }, [listUser.length])
+
+  const changeStatusUser = (id, status) => {
+	  let index = listUser.findIndex(value=>value.id===id)
+	  let arr = []
+	  arr =arr.concat(listUser)
+	  if (arr[index].block){
+		arr[index].block = false
+		unBlockUser(id)
+	  } else {
+		arr[index].block = true
+		blockUser(id);
+	}
+	  setListUser(arr)
+	
+	// window.location.reload(false);
+  }
   let divRender = (
 	  <div>
 
@@ -43,6 +59,7 @@ export default function Table(props) {
 			<tbody>
 				{ listUser.map((value, index) => {
 				let link =`user-profile/${value.id}`
+				console.log(value);
 				return (
 				<tr>
 					<th scope="row">{index + 1}</th>
@@ -50,13 +67,13 @@ export default function Table(props) {
 					<td>{value.phone}</td>
 					<td><a href={link}><i class="fas fa-eye"></i></a></td>
 					<td>
-					<a class="text-center">
-						{value.block ? (
-						<i class="fas fa-play-circle" onClick={()=>blockUser(value.id)}> </i>
-						) : (
-						<i class="fas fa-stop-circle" onClick={()=>unBlockUser(value.id)}> </i>
-						)}
-					</a>
+						{
+							value.block ? (
+								<button type="button" class="btn btn-outline-primary" onClick={()=>changeStatusUser(value.id, value.block)}>Unblock</button>
+							) : (
+								<button type="button" class="btn btn-outline-danger" onClick={()=>changeStatusUser(value.id, value.block)}>Block</button>
+							)
+						}
 					</td>
 				</tr>)
 				})}
@@ -64,7 +81,7 @@ export default function Table(props) {
 			</table>
 	  	</div>
 	)
-  } else if (props.type == 'review') {
+	} else if (props.type == 'review') {
 	divRender = (
 		<div>
 			<div className="text-center fs-3 mb-3">
@@ -84,14 +101,14 @@ export default function Table(props) {
 			</thead>
 			<tbody>
 				{listReview.map((value, index)=>{
-        let userReview = listUser.find(user=>user.id===value.userId);
-				let link =`user-profile/${value.id}`
+        		let userReview = listUser.find(user=>user.id===value.userId);
+				let linkUser =`user-profile/${value.id}`
 				return (
 				<tr>
 					<th scope="row">{index + 1}</th>
 					<td>{value.title}</td>
 					<td style={{maxWidth: "450px"}}>{value.content}</td>
-					<td><a href={link}>{userReview && userReview.username}</a></td>
+					<td><a href={linkUser}>{userReview && userReview.username}</a></td>
 					<td>
 
 					</td>
@@ -121,14 +138,16 @@ export default function Table(props) {
 				</thead>
 				<tbody>
 					{listComment.map( (value, index)=>{
+					let linkUser =`user-profile/${value.id}`;
+					let linkReview = `review-detail/${value.reviewId}`;
 					let userReview = listUser.find(user=>user.id===value.userId);
-          let reviewTitle = listReview.find(review1=>review1.id===value.reviewId);
+					let reviewTitle = listReview.find(review1=>review1.id===value.reviewId);
 					return (
 					<tr>
 						<th scope="row">{index + 1}</th>
-						<td>{reviewTitle && reviewTitle.title}</td>
+						<td><a href={linkReview}>{reviewTitle && reviewTitle.title}</a></td>
 						<td>{value.content}</td>
-						<td>{userReview && userReview.username}</td>
+						<td><a href={linkUser}>{userReview && userReview.username}</a></td>
 						<td>
 						<a class="text-center">
 						</a>
