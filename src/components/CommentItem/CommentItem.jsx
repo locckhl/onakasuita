@@ -1,8 +1,24 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import thumb from "../../assets/images/nano.jpg";
 import "./index.scss";
+import {getUserById} from "../../lib/api/user.js";
+export default function CommentItem(props) {
+  const [user,setUser] = useState('');
+  const fetchData = async (id) => {
+    try {
+      const userProfile = await getUserById(id)
 
-export default function CommentItem() {
+      console.log("data", userProfile);
+      setUser(userProfile.username);
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    fetchData(props.currentItem.userId);
+  }, []);
+
   return (
     <div className="pb-5 d-flex comment-item">
       <div className="thumb me-3">
@@ -12,16 +28,14 @@ export default function CommentItem() {
       </div>
       <div className="desc">
         <div className="comment-content me-3">
-          Multiply sea night grass fourth day sea lesser rule open subdue female
-          fill which them Blessed, give fill lesser bearing multiply sea night
-          grass fourth day sea lesser
+          
         </div>
         <div className="comment-info">
           <div className="d-flex">
             <span className="me-3">
-                <a href="/user-profile">Nanno</a>
+                <a href="/user-profile">{user}</a>
             </span>
-            <span>December 4, 2017 at 3:12 pm</span>
+            <span>{props.currentItem.content}</span>
           </div>
         </div>
       </div>

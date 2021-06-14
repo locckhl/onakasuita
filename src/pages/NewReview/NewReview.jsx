@@ -1,8 +1,23 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import {createReview} from "../../lib/api/reviews";
+// import db, { firebase } from "./firebase";
 import "./index.scss";
 export default function NewReview() {
+  //   const HandleSubmit = async () => {
+  //   try {
+  //     await createReview({
+  //       title: "hot hot",
+  //       content: "hotdog",
+  //       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  //       userId:auth.currentUser.uid,
+  //     });
+  //     alert("Sucess roi");
+  //   } catch (err) {
+  //     alert("Fail roi");
+  //   }
+  // };
   return (
     <div className="review py-5">
       <div className="fs-2">Create new review</div>
