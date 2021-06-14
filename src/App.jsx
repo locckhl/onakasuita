@@ -16,7 +16,7 @@ import { auth, storeUserInfo } from "./lib/api/user";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       let newUser = null;
