@@ -1,11 +1,11 @@
 import React, { useState,useEffect } from "react";
 import Table from "../../components/Table/Table";
-import ReviewList from "../../components/ReviewItemList/ReviewItemList"
 import CommentList from "../../components/CommentList/CommentList"
 import "./index.scss";
 import { getAllUser, } from '../../lib/api/user'
 import { getReviews} from '../../lib/api/reviews'
 import { getComments} from '../../lib/api/comment'
+
 export default function Admin() {
   const [activeTab, setActiveTab] = useState(1);
   const [ listUser, setListUser ]= useState([]);
@@ -167,10 +167,10 @@ export default function Admin() {
             </div>
           </div>
           <div className={activeTab === 2 ? "d-block" : "d-none"} id="tab-2">
-            <Table />
+            <Table type="users" />
           </div>
           <div className={activeTab === 3 ? "d-block" : "d-none"} id="tab-3">
-            <ReviewList />
+            <Table type="review" />
           </div>
           <div className={activeTab === 4 ? "d-block" : "d-none"} id="tab-4">
             <CommentList />

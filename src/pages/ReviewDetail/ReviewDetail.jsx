@@ -2,6 +2,7 @@ import React from "react";
 import CommentList from "../../components/CommentList/CommentList";
 import "./index.scss";
 import avatar from "../../assets/images/nano.jpg";
+import CommentForm from "../../components/CommentForm/CommentForm";
 
 export default function ReviewDetail() {
   return (
@@ -62,18 +63,7 @@ export default function ReviewDetail() {
       </div>
       
       <div className="comment-form">
-        <div className="fs-4">Leave a comment</div>
-        <div class="input-group mb-4">
-          <span class="input-group-text">Hi username</span>
-          <textarea class="form-control" aria-label="With textarea"></textarea>
-        </div>
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="inputGroupFileAddon03"
-        >
-          Submit
-        </button>
+        <CommentForm />
       </div>
     </div>
   );
