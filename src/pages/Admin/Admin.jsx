@@ -173,7 +173,7 @@ export default function Admin() {
             <Table type="review" />
           </div>
           <div className={activeTab === 4 ? "d-block" : "d-none"} id="tab-4">
-            <CommentList />
+            <Table type="comment" />
           </div>
         </div>
       </div>
