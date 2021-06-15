@@ -59,7 +59,7 @@ function App() {
             <ReviewList />
           </Route>
 
-          <Route exact path="/review-detail">
+          <Route exact path="/review-detail/:id">
             <ReviewDetail />
           </Route>
 
