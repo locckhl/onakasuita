@@ -61,8 +61,8 @@ export default function Header({}) {
                   ""
                 )}
               </div>
-              <div className="me-4">
-                <SignIn currentUser={currentUser} />
+              <div className="e-4">
+                <SignIn currenmtUser={currentUser} />
                 {/* <div className="btn btn-primary">Sign out</div> */}
               </div>
             </div>

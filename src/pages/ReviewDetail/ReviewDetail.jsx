@@ -6,17 +6,24 @@ import CommentForm from "../../components/CommentForm/CommentForm";
 import { useParams } from "react-router";
 import { getReviewById, getReviewComments } from "../../lib/api/reviews";
 import { getUserById } from "../../lib/api/user";
-
+import {createComment} from '../../lib/api/comment'
 export default function ReviewDetail() {
   const [review, setReview] = useState(null);
   const [author, setAuthor] = useState(null);
+  const [addComment, setAddComment]=useState(0)
   const [reviewComments, setReviewComments] = useState(null);
   let { id } = useParams();
 
   useEffect(() => {
     fetchData();
   }, []);
-
+  const onSubmitComment =async (data) =>{
+    let status= await createComment(data)
+    if (status){
+      setAddComment(addComment+1)
+    }
+    console.log(status);
+  }
   const fetchData = async () => {
     try {
       const reviewRes = await getReviewById(id);
@@ -71,11 +78,11 @@ export default function ReviewDetail() {
         {review.content}
       </div>
       <div className="review-comments-container" id="comments">
-       <CommentList />
+       <CommentList id={id} addComment={addComment} />
       </div>
       
       <div className="comment-form">
-        <CommentForm />
+        <CommentForm review={review} id={id} onSubmitComment={onSubmitComment} />
       </div>
     </div>
   );
