@@ -26,18 +26,8 @@ export default function ReviewDetail() {
       setReview(reviewRes);
       setAuthor(authorRes);
       setReviewComments(reviewCommentsRes);
+      // console.log("author", author);
 
-
-      // console.log("reviewRes.userId", reviewRes.userId);
-
-
-      console.log("author", author);
-
-      // console.log("userReviewsRes", userReviewsRes);
-      // console.log("userCommentsRes", userCommentsRes);
-
-      // console.log("current user ", auth.currentUser.uid);
-      // console.log(" user ", user.uid);
     } catch (err) {
       throw err;
     }
