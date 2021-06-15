@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+
 import "./index.scss";
 import nano from "../../assets/images/nano.jpg";
 import UserEdit from "../../components/UserEdit/UserEdit";
 import ReviewItemList from "../../components/ReviewItemList/ReviewItemList";
+
 import {
   auth,
   getUserById,
@@ -42,6 +44,7 @@ export default function UserProfile() {
   };
 
   if (!user || !userComments || !userReviews) return <div>loading</div>;
+
   return (
     <div className="py-5">
       <div className="container ">
@@ -54,7 +57,6 @@ export default function UserProfile() {
           <div className="col-7 info">
             <div className="row">
               <div className="col-5 fs-2">{user.username}</div>
-
               <div className="col d-flex align-items-center">
                 {auth.currentUser && user.id === auth.currentUser.uid ? (
                   <UserEdit user={user}/>
@@ -63,7 +65,6 @@ export default function UserProfile() {
                 )}
               </div>
             </div>
-
             <div className="row mb-2 ps-3">Email: {user.email}</div>
 
             <div className="row mb-2 ps-3">Phone: {user.phone}</div>

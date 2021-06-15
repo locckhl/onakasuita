@@ -1,66 +1,166 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
+import { getAllUser, deleteUser, blockUser, unBlockUser } from "../../lib/api/user"
+import { getReviews } from "../../lib/api/reviews"
+import { getComments } from "../../lib/api/comment"
 
-export default function Table() {
+export default function Table(props) {
+  const [ listUser, setListUser ]= useState([])
+  const [ listReview, setListReview ]= useState([])
+  const [ listComment, setListComment ]= useState([])
+
+  useEffect(async() => {
+    let follow = await getAllUser() || [];
+    setListUser(follow)
+    follow = await getReviews() || [];
+    setListReview(follow)
+    follow = await getComments() || [];
+    setListComment(follow)
+  }, [listUser.length])
+
+  const changeStatusUser = (id, status) => {
+	  let index = listUser.findIndex(value=>value.id===id)
+	  let arr = []
+	  arr =arr.concat(listUser)
+	  if (arr[index].block){
+		arr[index].block = false
+		unBlockUser(id)
+	  } else {
+		arr[index].block = true
+		blockUser(id);
+	}
+	  setListUser(arr)
+	
+	// window.location.reload(false);
+  }
+  let divRender = (
+	  <div>
+
+	  </div>
+  );
+	if (props.type == 'users') {
+	divRender = (
+		<div>
+			<div className="text-center fs-3 mb-3">
+			<span>User Table</span>
+			</div>
+	
+			{/* table content */}
+			<table class="table table-striped table-hover table-bordered admin-table">
+			<thead>
+				<tr>
+				<th scope="col">#</th>
+				<th scope="col">UserName</th>
+				<th scope="col">Phone</th>
+				<th scope="col">View Profile</th>
+				<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{ listUser.map((value, index) => {
+				let link =`user-profile/${value.id}`
+				console.log(value);
+				return (
+				<tr>
+					<th scope="row">{index + 1}</th>
+					<td>{value.username}</td>
+					<td>{value.phone}</td>
+					<td><a href={link}><i class="fas fa-eye"></i></a></td>
+					<td>
+						{
+							value.block ? (
+								<button type="button" class="btn btn-outline-primary" onClick={()=>changeStatusUser(value.id, value.block)}>Unblock</button>
+							) : (
+								<button type="button" class="btn btn-outline-danger" onClick={()=>changeStatusUser(value.id, value.block)}>Block</button>
+							)
+						}
+					</td>
+				</tr>)
+				})}
+			</tbody>
+			</table>
+	  	</div>
+	)
+	} else if (props.type == 'review') {
+	divRender = (
+		<div>
+			<div className="text-center fs-3 mb-3">
+			<span>Reivew Table</span>
+			</div>
+	
+			{/* table content */}
+			<table class="table table-striped table-hover table-bordered admin-table">
+			<thead>
+				<tr>
+				<th scope="col">#</th>
+				<th scope="col">Title</th>
+				<th scope="col">Content</th>
+				<th scope="col">Reviewer</th>
+				<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{listReview.map((value, index)=>{
+        		let userReview = listUser.find(user=>user.id===value.userId);
+				let linkUser =`user-profile/${value.id}`
+				return (
+				<tr>
+					<th scope="row">{index + 1}</th>
+					<td>{value.title}</td>
+					<td style={{maxWidth: "450px"}}>{value.content}</td>
+					<td><a href={linkUser}>{userReview && userReview.username}</a></td>
+					<td>
+
+					</td>
+				</tr>)
+				})}
+			</tbody>
+			</table>
+	  	</div>
+	);
+	} else if (props.type == 'comment') {
+		divRender = (
+			<div>
+				<div className="text-center fs-3 mb-3">
+				<span>Comment Table</span>
+				</div>
+		
+				{/* table content */}
+				<table class="table table-striped table-hover table-bordered admin-table">
+				<thead>
+					<tr>
+					<th scope="col">#</th>
+					<th scope="col">Review Title</th>
+					<th scope="col">Content</th>
+					<th scope="col">User</th>
+					<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{listComment.map( (value, index)=>{
+					let linkUser =`user-profile/${value.id}`;
+					let linkReview = `review-detail/${value.reviewId}`;
+					let userReview = listUser.find(user=>user.id===value.userId);
+					let reviewTitle = listReview.find(review1=>review1.id===value.reviewId);
+					return (
+					<tr>
+						<th scope="row">{index + 1}</th>
+						<td><a href={linkReview}>{reviewTitle && reviewTitle.title}</a></td>
+						<td>{value.content}</td>
+						<td><a href={linkUser}>{userReview && userReview.username}</a></td>
+						<td>
+						<a class="text-center">
+						</a>
+						</td>
+					</tr>)
+					})}
+				</tbody>
+				</table>
+			</div>
+		);
+	}
+  console.log(listReview);
   return (
-    <div>
-      <div className="text-center fs-3 mb-3">
-        <span>User</span>
-      </div>
-
-      {/* table content */}
-      <table class="table table-striped table-hover table-bordered admin-table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-            <th scope="col">View</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td><a href="user-profile">profile</a></td>
-            <td>
-              {" "}
-              <a >
-                <i class="fas fa-trash"></i>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td><a href="user-profile">profile</a></td>
-            <td>
-              {" "}
-              <a >
-                <i class="fas fa-trash"></i>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-            <td><a href="user-profile">profile</a></td>
-            <td>
-              {" "}
-              <a >
-                <i class="fas fa-trash"></i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    divRender
   );
 }
