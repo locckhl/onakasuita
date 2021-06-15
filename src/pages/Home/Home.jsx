@@ -18,7 +18,15 @@ export default function Home() {
   const fetchData = async () =>{
     const res = await getReviews()
     setReviews(res)
-  }
+  };
+
+  const first7Reviews = reviews.filter((item, index) => (
+    index <=6 
+  ))
+
+  const sortByTime = first7Reviews.sort((a, b) => {
+      return new Date(b.createdAt.seconds) - new Date(a.createdAt.seconds);
+  });
 
   if(!reviews) return ( <div>loading</div> )
 
@@ -98,11 +106,11 @@ export default function Home() {
       {/* New review */}
       <div className="container my-5 overflow-hidden">
         <div className="new-review-list__header fs-1 text-center my-3">
-          New reivew
+          New review
         </div>
 
         <div className="review-item-list-container">
-          <ReviewItemList items={reviews} />
+          <ReviewItemList items={sortByTime} />
         </div>
       </div>
     </home>
