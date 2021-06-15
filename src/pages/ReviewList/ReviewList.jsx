@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import ReviewItem from "../../components/ReviewItem/ReviewItem";
 import ReviewItemList from "../../components/ReviewItemList/ReviewItemList";
+import { getReviews } from "../../lib/api/reviews";
 export default function ReviewList() {
+  const [reviews, setReviews] = useState([])
+  const [searchInput, setSearchInput] = useState("")
+
+  useEffect(() => {
+    fetchData()
+
+  }, [])
+
+  const fetchData = async () =>{
+    const res = await getReviews()
+    setReviews(res)
+  }
+
+  const filteredByTitle = reviews.filter((item) => {
+    return item.title.match(searchInput);
+  });
+
+  if(!reviews) return ( <div>loading</div> )
+
   return (
     <div className="container my-5 overflow-hidden">
       <div className="new-review-list__header fs-1 text-center my-3">
@@ -17,6 +37,10 @@ export default function ReviewList() {
             placeholder="Review title or author"
             aria-label="serach"
             aria-describedby="addon-wrapping"
+            value={searchInput}
+            onChange={(e)=>{
+              setSearchInput(e.target.value)
+            }}
           />
         </div>
         <div className="float-end">
@@ -28,7 +52,7 @@ export default function ReviewList() {
       </div>
 
       <div className="review-item-list-container">
-          <ReviewItemList />
+          <ReviewItemList items={filteredByTitle}/>
         </div>
     </div>
   );

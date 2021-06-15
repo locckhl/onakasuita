@@ -32,9 +32,9 @@ const getReviewComments = async (id) => {
 
     const items = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     // console.log(items);
-    if (items.length === 0) {
-      throw new Error("No such document!");
-    }
+    // if (items.length === 0) {
+    //   throw new Error("No such document!");
+    // }
     return items;
   } catch (err) {
     throw err;

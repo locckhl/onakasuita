@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import logo from "../../assets/images/logo2.png";
 import { Modal, Button } from "react-bootstrap";
 import SignIn from "../../components/SignIn/SignIn";
-export default function Header({ currentUser }) {
+import { auth, getUserById } from "../../lib/api/user";
+
+export default function Header({}) {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      let newUser = null;
+      if (user) {
+        newUser = await getUserById(auth.currentUser.uid);
+      }
+      setCurrentUser(newUser);
+    });
+  }, []);
   return (
     <header>
       <div className="container-fluid">
@@ -11,11 +24,11 @@ export default function Header({ currentUser }) {
           <div className="col-1 header-logo">
             <div>
               <a href="/">
-                  <img src={logo} alt="" />
+                <img src={logo} alt="" />
               </a>
             </div>
           </div>
-          <div className="col-8 header-navbar ">
+          <div className="col-7 header-navbar ">
             <dl className="d-flex justify-content-start fs-5">
               <dd>
                 <a href="/">HOME</a>
@@ -31,15 +44,24 @@ export default function Header({ currentUser }) {
               </dd>
             </dl>
           </div>
-          <div className="col-3 header-user">
-            <div className="row">
-              <div className="col">
-                <a href="/admin">
-                  {/* Or user profile */}
-                  <span>Welcome admin</span>
-                </a>
+          <div className="col-4 header-user">
+            <div className="d-flex justify-content-end ">
+              <div className="me-4">
+                {currentUser ? (
+                  currentUser.admin ? (
+                    <a href="/admin">
+                      <span>Welcome admin</span>
+                    </a>
+                  ) : (
+                    <a href="/admin">
+                      <span>Welcome {currentUser.username}</span>
+                    </a>
+                  )
+                ) : (
+                  ""
+                )}
               </div>
-              <div className="col">
+              <div className="me-4">
                 <SignIn currentUser={currentUser} />
                 {/* <div className="btn btn-primary">Sign out</div> */}
               </div>
