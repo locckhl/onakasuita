@@ -2,6 +2,7 @@
   display: inline;
   position: relative;
   padding-right: 25px !important;
+  cursor: pointer;
 }
 .filter-element::before,
 .filter-element::after {
@@ -12,7 +13,6 @@
   right: 4px;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  cursor: pointer;
 }
 .filter-element:before {
   border-top: 7px solid #000;
