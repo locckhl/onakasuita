@@ -5,9 +5,9 @@ name: React.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   build:
@@ -27,4 +27,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn install --frozen-lockfile
     - run: yarn test --passWithNoTests
-    - run: CI='' yarn run build
+    # - run: CI='' yarn run build
