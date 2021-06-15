@@ -71,10 +71,19 @@ const updateUser = async ({ id, avatar, phone, username }) => {
     const userDoc = await db.collection("users").doc(id).get();
     console.log("userdoc", userDoc);
     if (userDoc.exists) {
-      await db
+      if(avatar !== null && avatar !== undefined){
+        await db
         .collection("users")
         .doc(id)
         .update({ ...userDoc.data(), avatar, phone, username });
+      }
+      else{
+        await db
+        .collection("users")
+        .doc(id)
+        .update({ ...userDoc.data(), phone, username });
+      }
+     
     }
     return true;
   } catch (err) {

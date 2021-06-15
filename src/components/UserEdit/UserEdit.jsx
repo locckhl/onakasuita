@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { updateUser, uploadImage } from "../../lib/api/user";
-import "./index.scss"
+import "./index.scss";
 
 export default function UserEdit({ user }) {
   const [show, setShow] = useState(false);
@@ -9,16 +9,41 @@ export default function UserEdit({ user }) {
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
   const [avatar, setAvatar] = useState(user.avatar);
-  const avatarInput = useRef()
+  const avatarInput = useRef();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleUpdate = async () => {
-    console.log("id",avatarInput.current.files[0]);
+    console.log("id", avatarInput.current.files[0]);
 
-    const downloadURL = await uploadImage(avatarInput.current.files[0])
-    const userRes = await updateUser({ id: user.id, avatar:downloadURL, phone, username });
-    
+    try {
+      if (
+        avatarInput.current.files[0] !== null &&
+        avatarInput.current.files[0] !== undefined
+      ) {
+        const downloadURL = await uploadImage(avatarInput.current.files[0]);
+        const userRes = await updateUser({
+          id: user.id,
+          avatar: downloadURL,
+          phone,
+          username,
+        });
+        alert("更新完了");
+        window.location.reload(true);
+      } else {
+        const userRes = await updateUser({
+          id: user.id,
+          avatar: null,
+          phone,
+          username,
+        });
+        alert("更新完了");
+        window.location.reload(true);
+      }
+    } catch (error) {
+      alert("申し訳ございません、エラーが発生した");
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -86,8 +111,7 @@ export default function UserEdit({ user }) {
           <label for="avatar_image" class="custom-file-upload btn btn-primary">
             <i class="fa fa-cloud-upload"></i> Upload avatar
           </label>
-          <input type="file" id="avatar_image" ref={avatarInput}/>
-
+          <input type="file" id="avatar_image" ref={avatarInput} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
