@@ -42,21 +42,22 @@ export default function Header({}) {
               <dd>
                 <a href="#">CONTACT US</a>
               </dd>
+              {currentUser && currentUser.admin ? (
+                <dd>
+                  <a href="/admin">ADMIN</a>
+                </dd>
+              ) : (
+                ""
+              )}
             </dl>
           </div>
           <div className="col-4 header-user">
             <div className="d-flex justify-content-end ">
               <div className="me-4">
                 {currentUser ? (
-                  currentUser.admin ? (
-                    <a href="/admin">
-                      <span>Welcome admin</span>
-                    </a>
-                  ) : (
-                    <a href="/admin">
-                      <span>Welcome {currentUser.username}</span>
-                    </a>
-                  )
+                  <a href={`/user-profile/${currentUser.id}`}>
+                    <span>Welcome {currentUser.username}</span>
+                  </a>
                 ) : (
                   ""
                 )}

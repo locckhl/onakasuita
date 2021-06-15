@@ -2,15 +2,28 @@ import React, { useState,useEffect } from "react";
 import Table from "../../components/Table/Table";
 import CommentList from "../../components/CommentList/CommentList"
 import "./index.scss";
-import { getAllUser, } from '../../lib/api/user'
+import { auth, getAllUser, getUserById, } from '../../lib/api/user'
 import { getReviews} from '../../lib/api/reviews'
 import { getComments} from '../../lib/api/comment'
+import NF404 from "../../components/NF404/NF404";
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState(1);
   const [ listUser, setListUser ]= useState([]);
   const [ listReview, setListReview ]= useState([]);
   const [ listComment, setListComment ]= useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      let newUser = null;
+      if (user) {
+        newUser = await getUserById(auth.currentUser.uid);
+      }
+      setCurrentUser(newUser);
+    });
+  }, []);
+
   useEffect(async() => {
     let follow = await getAllUser() || [];
     setListUser(follow)
@@ -22,8 +35,12 @@ export default function Admin() {
   const handleChangeActiveTab = (tab) => {
     setActiveTab(tab);
   };
+  
+  if(!currentUser) return ( <div>loading</div> )
 
-  return (
+  if(currentUser && !currentUser.admin) return <NF404 />
+
+  return  (
     <div className="container-fluid my-5">
       <div className="row">
         <div className="col-2 admin-navbar">
