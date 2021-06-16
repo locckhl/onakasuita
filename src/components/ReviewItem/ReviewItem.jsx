@@ -3,6 +3,7 @@ import "./index.scss";
 import sushi from "../../assets/images/sushi.jpg";
 import { getReviewComments } from "../../lib/api/reviews";
 import parse from "html-react-parser";
+import Skeleton from "react-loading-skeleton";
 
 export default function ReviewDetail({ item }) {
   const [reviewComments, setReviewComments] = useState(null);
@@ -21,7 +22,7 @@ export default function ReviewDetail({ item }) {
     }
   };
 
-  if (!reviewComments) return <div>loading</div>;
+  if (!reviewComments) return <Skeleton count="5" />
   return (
     <div className="review-detail">
       <div className="review-detail-img">

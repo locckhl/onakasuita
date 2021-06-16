@@ -49,7 +49,7 @@ export default function ReviewList() {
           <input
             type="text"
             class="form-control"
-            placeholder="Review title or author"
+            placeholder="Review title"
             aria-label="serach"
             aria-describedby="addon-wrapping"
             value={searchInput}

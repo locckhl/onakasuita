@@ -44,7 +44,7 @@ export default function Header({handleShow}) {
                 }}>CREATE REVIEW</a>
               </dd>
               <dd>
-                <a href="#">CONTACT US</a>
+                <a href="#footer">CONTACT US</a>
               </dd>
               {currentUser && currentUser.admin ? (
                 <dd>
