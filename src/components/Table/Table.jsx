@@ -6,8 +6,8 @@ import {
   blockUser,
   unBlockUser,
 } from "../../lib/api/user";
-import { getReviews } from "../../lib/api/reviews";
-import { getComments } from "../../lib/api/comment";
+import { deleteReview, getReviews } from "../../lib/api/reviews";
+import { deleteComment, getComments } from "../../lib/api/comment";
 import parse from "html-react-parser";
 
 export default function Table(props) {
@@ -39,6 +39,31 @@ export default function Table(props) {
 
     // window.location.reload(false);
   };
+
+  const onDeleteReview = async (id) => {
+    try {
+      deleteReview(id);
+      alert("Delete success");
+      let follow = (await getReviews()) || [];
+      setListReview(follow);
+    } catch (error) {
+      alert("Error when delete review");
+      console.log(error);
+    }
+  };
+
+  const onDeleteComment = async (id) => {
+    try {
+      deleteComment(id);
+      alert("Delete success");
+      let follow = (await getComments()) || [];
+      setListComment(follow);
+    } catch (error) {
+      alert("Error when delete comment");
+      console.log(error);
+    }
+  };
+
   let divRender = <div></div>;
   if (props.type == "users") {
     divRender = (
@@ -69,9 +94,7 @@ export default function Table(props) {
                     <a href={link}>{value.username}</a>
                   </td>
                   <td>{value.phone}</td>
-                  <td>
-                    {value.email}
-                  </td>
+                  <td>{value.email}</td>
                   <td>
                     {value.block ? (
                       <button
@@ -146,7 +169,15 @@ export default function Table(props) {
                   <td>
                     <a href={linkUser}>{userReview && userReview.username}</a>
                   </td>
-                  <td></td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger"
+                      onClick={() => onDeleteReview(value.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
             })}
@@ -193,7 +224,13 @@ export default function Table(props) {
                     <a href={linkUser}>{userReview && userReview.username}</a>
                   </td>
                   <td>
-                    <a class="text-center"></a>
+                  <button
+                      type="button"
+                      class="btn btn-outline-danger"
+                      onClick={() => onDeleteComment(value.id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );

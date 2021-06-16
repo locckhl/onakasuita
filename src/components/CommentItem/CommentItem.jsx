@@ -2,8 +2,9 @@ import React,{useEffect,useState} from "react";
 import thumb from "../../assets/images/nano.jpg";
 import "./index.scss";
 import {auth, getUserById} from "../../lib/api/user.js";
+import Skeleton from "react-loading-skeleton";
 export default function CommentItem(props) {
-  const [user,setUser] = useState('');
+  const [user,setUser] = useState(null);
   const fetchData = async (id) => {
     try {
       const userProfile = await getUserById(id)
@@ -17,7 +18,7 @@ export default function CommentItem(props) {
     fetchData(props.currentItem.userId);
   }, []);
 
-
+  if(!user) return <Skeleton count="3" />
 
   return (
     <div className="pb-5 d-flex comment-item">
@@ -34,7 +35,7 @@ export default function CommentItem(props) {
           <div className="d-flex justify-content-between">
             <div>
               <span className="me-3">
-                  <a href="/user-profile">{user.username}</a>
+                  <a href={`/user-profile/${user.id}`}>{user.username}</a>
               </span>
               <span>{props.currentItem.content}</span>
             </div>
