@@ -7,8 +7,6 @@ export default function CommentItem(props) {
   const fetchData = async (id) => {
     try {
       const userProfile = await getUserById(id)
-
-      console.log("data", userProfile);
       setUser(userProfile.username);
     } catch (err) {
       throw err;
@@ -31,11 +29,16 @@ export default function CommentItem(props) {
           
         </div>
         <div className="comment-info">
-          <div className="d-flex">
-            <span className="me-3">
-                <a href="/user-profile">{user}</a>
-            </span>
-            <span>{props.currentItem.content}</span>
+          <div className="d-flex justify-content-between">
+            <div>
+              <span className="me-3">
+                  <a href="/user-profile">{user}</a>
+              </span>
+              <span>{props.currentItem.content}</span>
+            </div>
+            <div style={{marginLeft: "30px"}}>
+              <button type="button" class="btn btn-danger" onClick={()=>props.deleteComment(props.currentItem.id)}>Delete</button>
+            </div>
           </div>
         </div>
       </div>

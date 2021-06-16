@@ -2,8 +2,9 @@ import React,{useEffect,useParams,useState} from "react";
 import CommentItem from "../CommentItem/CommentItem";
 import "./index.scss";
 import {getReviewComments} from "../../lib/api/reviews.js";
-export default function CommentList() {
-  const id = 'M5urkL6iKu2KskZ8qENA';
+import {deleteComment} from "../../lib/api/comment";
+export default function CommentList(props) {
+  const id = props.id;
   const [items, setItem] = useState('');
     const fetchData = async (id) => {
     try {
@@ -18,8 +19,15 @@ export default function CommentList() {
 
   useEffect(() => {
     fetchData(id);
-  }, []);
+  }, [props.addComment]);
 
+  const onDelete =async (id1)=>{
+    let status= await deleteComment(id1);
+    if (status){
+      fetchData(id);
+    }
+  }
+  console.log(items);
   return (
     <div className="review-comments">
       {items.length > 0 ? (
@@ -27,7 +35,8 @@ export default function CommentList() {
       // <div className="fs-3 mb-4 ">{items.length} Comments</div>
         items.map(item => (
           <CommentItem
-            currentItem = {item}
+            currentItem = {item} 
+            deleteComment={onDelete}
           />
         ))
       ):
