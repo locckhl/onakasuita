@@ -66,8 +66,8 @@ export default function Header({handleShow}) {
                   ""
                 )}
               </div>
-              <div className="e-4">
-                <SignIn currenmtUser={currentUser} />
+              <div className="me-4">
+                <SignIn currentUser={currentUser} />
                 {/* <div className="btn btn-primary">Sign out</div> */}
               </div>
             </div>

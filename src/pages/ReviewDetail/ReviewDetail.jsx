@@ -9,7 +9,7 @@ import { getUserById } from "../../lib/api/user";
 import {createComment} from '../../lib/api/comment'
 import parse from "html-react-parser";
 
-export default function ReviewDetail() {
+export default function ReviewDetail({handleShow}) {
   const [review, setReview] = useState(null);
   const [author, setAuthor] = useState(null);
   const [addComment, setAddComment]=useState(0)
@@ -26,6 +26,7 @@ export default function ReviewDetail() {
     }
     console.log(status);
   }
+
   const fetchData = async () => {
     try {
       const reviewRes = await getReviewById(id);
@@ -74,7 +75,7 @@ export default function ReviewDetail() {
       </div>
 
       <div className="comment-form">
-        <CommentForm review={review} id={id} onSubmitComment={onSubmitComment} />
+        <CommentForm review={review} id={id} onSubmitComment={onSubmitComment} handleShow={handleShow}/>
       </div>
     </div>
   );

@@ -45,7 +45,7 @@ function App() {
         <Modal.Header closeButton>
           <Modal.Title>Alert</Modal.Title>
         </Modal.Header>
-        <Modal.Body>You need to login in order to create review !</Modal.Body>
+        <Modal.Body>You need to login in order to do this action !</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -89,8 +89,8 @@ function App() {
             <ReviewList />
           </Route>
 
-          <Route exact path="/review-detail/:id">
-            <ReviewDetail />
+          <Route exact path="/review-detail/:id" >
+            <ReviewDetail handleShow={handleShow} />
           </Route>
 
           <Route exact path="/test-api">
