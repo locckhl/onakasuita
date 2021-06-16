@@ -24,7 +24,7 @@ export default function ReviewDetail({ item }) {
 
   if (!reviewComments) return <Skeleton count="5" />
   return (
-    <div className="review-detail">
+    <div className="review-detail mb-5 d-flex flex-column">
       <div className="review-detail-img">
         <a
           className="review-detail-img__container"
@@ -48,10 +48,10 @@ export default function ReviewDetail({ item }) {
             item.content
           )}{" "}
         </div>
-        <div className="review-detail-text__comment">
+        <div className="review-detail-text__comment fw-bold">
           {reviewComments.length} comments
         </div>
-        <div className="review-detail-text__time text-center">
+        <div className="review-detail-text__time text-center ">
           {new Date(item.createdAt.seconds * 1000).toLocaleString()}
         </div>
       </div>

@@ -21,9 +21,9 @@ export default function CommentItem(props) {
   if(!user) return <Skeleton count="3" />
 
   return (
-    <div className="pb-5 d-flex comment-item">
+    <div className="pb-5 d-flex comment-item" >
       <div className="thumb me-3">
-        <a href="/user-profile">
+        <a href={`/user-profile/${user.id}`}>
           <img src={thumb} alt="author-avatar" />
         </a>
       </div>
@@ -37,7 +37,7 @@ export default function CommentItem(props) {
               <span className="me-3">
                   <a href={`/user-profile/${user.id}`}>{user.username}</a>
               </span>
-              <span>{props.currentItem.content}</span>
+              <span id={props.currentItem.id} tabIndex="0">{props.currentItem.content}</span>
             </div>
             <div style={{marginLeft: "30px"}}>
              { auth.currentUser && auth.currentUser.uid === user.id && <button type="button" class="btn btn-danger" onClick={()=>props.deleteComment(props.currentItem.id)}>Delete</button>}

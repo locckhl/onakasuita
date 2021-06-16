@@ -28,7 +28,7 @@ export default function UserEdit({ user }) {
           phone,
           username,
         });
-        alert("更新完了");
+        alert("Successfully updated");
         window.location.reload(true);
       } else {
         const userRes = await updateUser({
@@ -37,11 +37,11 @@ export default function UserEdit({ user }) {
           phone,
           username,
         });
-        alert("更新完了");
+        alert("Successfully updated");
         window.location.reload(true);
       }
     } catch (error) {
-      alert("申し訳ございません、エラーが発生した");
+      alert("Fail to update");
       console.log(error);
     }
   };

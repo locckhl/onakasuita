@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CommentList from "../../components/CommentList/CommentList";
 import "./index.scss";
 import avatar from "../../assets/images/nano.jpg";
 import CommentForm from "../../components/CommentForm/CommentForm";
 import { useParams } from "react-router";
+import { useLocation } from "react-router-dom";
 import { getReviewById, getReviewComments } from "../../lib/api/reviews";
 import { getUserById } from "../../lib/api/user";
 import { createComment } from "../../lib/api/comment";
 import parse from "html-react-parser";
 import Skeleton from "react-loading-skeleton";
 
-export default function ReviewDetail({ handleShow }) {
+export default function ReviewDetail({ handleShow, location }) {
   const [review, setReview] = useState(null);
   const [author, setAuthor] = useState(null);
   const [addComment, setAddComment] = useState(0);
   const [reviewComments, setReviewComments] = useState(null);
   let { id } = useParams();
+  const { hash } = useLocation();
+  const commentRef = useRef(null);
 
   useEffect(() => {
     fetchData();
@@ -37,16 +40,30 @@ export default function ReviewDetail({ handleShow }) {
       setReview(reviewRes);
       setAuthor(authorRes);
       setReviewComments(reviewCommentsRes);
+
       // console.log("author", author);
     } catch (err) {
       throw err;
     }
   };
 
+  if (review) {
+    setTimeout(() => {
+      if (hash) {
+        const ref = document.querySelector(hash);
+        ref.scrollIntoView();
+        ref.focus();
+        // console.log("hash",hash);
+        // console.log("ref",ref);
+      }
+    }, 1000);
+  }
   if (!review || !author || !reviewComments)
     return (
       <div className="review-container my-3 py-3">
-        <div className="rewview-header fs-1"><Skeleton count="3" /></div>
+        <div className="rewview-header fs-1">
+          <Skeleton count="3" />
+        </div>
         <div className="rewview-info d-flex">
           <div className="review-info__left me-4">
             <a href="/user-profile">
@@ -55,13 +72,17 @@ export default function ReviewDetail({ handleShow }) {
           </div>
           <div className="review-info__right d-flex">
             <div className="row flex-column">
-              <span className="author-name fs-3 col"><Skeleton /></span>
+              <span className="author-name fs-3 col">
+                <Skeleton />
+              </span>
               <div className="d-flex col">
                 <div className="review-date me-3">
-                <Skeleton />
+                  <Skeleton />
                 </div>
                 <div className="">
-                  <a href="#comments"><Skeleton /> comments</a>
+                  <a href="#comments">
+                    <Skeleton /> comments
+                  </a>
                 </div>
               </div>
             </div>
@@ -69,14 +90,18 @@ export default function ReviewDetail({ handleShow }) {
         </div>
         <div className="rewview-body">
           {/* {true ? new DOMParser().parseFromString(review.content, 'text/html').body : ''} */}
-          <Skeleton height="10"/>
+          <Skeleton height="10" />
         </div>
-        <div className="review-comments-container" id="comments">
-        <Skeleton height="10"/>
+        <div
+          className="review-comments-container"
+          id="comments"
+          ref={commentRef}
+        >
+          <Skeleton height="10" />
         </div>
 
         <div className="comment-form">
-        <Skeleton height="10"/>
+          <Skeleton height="10" />
         </div>
       </div>
     );

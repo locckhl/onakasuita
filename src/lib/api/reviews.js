@@ -45,7 +45,8 @@ const createReview = async ({ title, content, userId, thumbnail }) => {
     const status = await db
       .collection("reviews")
       .add({ title, content, createdAt: firebase.firestore.FieldValue.serverTimestamp(), userId, thumbnail });
-    console.log(status);
+    // console.log("status", status);
+    return status
   } catch (err) {
     throw err;
   }

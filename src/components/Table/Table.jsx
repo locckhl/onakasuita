@@ -219,7 +219,7 @@ export default function Table(props) {
                   <td>
                     <a href={linkReview}>{reviewTitle && reviewTitle.title}</a>
                   </td>
-                  <td>{value.content}</td>
+                  <td> <a href={`/review-detail/${value.reviewId}#${value.id}`}>{value.content}</a> </td>
                   <td>
                     <a href={linkUser}>{userReview && userReview.username}</a>
                   </td>

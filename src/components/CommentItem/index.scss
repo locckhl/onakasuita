@@ -14,3 +14,9 @@
     }
   }
 }
+
+.comment-info {
+  span:focus {
+    border: 2px rgb(253, 253, 0) solid;
+  }
+}

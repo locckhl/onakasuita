@@ -17,26 +17,27 @@ export default function NewReview({handleShow, currentUser}) {
   const handleSubmit = async () => {
     try {
       if (title === null || title === undefined) {
-        throw new Error("タイトルを入力してください");
+        throw new Error("Please input title");
       }
       if (content === null || content === undefined) {
-        throw new Error("内容を入力してください");
+        throw new Error("Please input content ");
       }
       if (
         thumbnailInput.current.files[0] === null ||
         thumbnailInput.current.files[0] === undefined
       ) {
-        throw new Error("イメージをアップロードしてください");
+        throw new Error("Please input thumbnail");
       }
       const thumbnail = await uploadImage(thumbnailInput.current.files[0]);
 
-      await createReview({
+      const res = await createReview({
         title,
         content,
         userId: auth.currentUser.uid,
         thumbnail,
       });
-      alert("投稿完了");
+      alert("Successfully created your review");
+      window.location = `/review-detail/${res.id}`
     } catch (err) {
       alert(err);
     }
