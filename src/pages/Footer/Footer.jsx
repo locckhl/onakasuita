@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 function Footer() {
-  return <footer className="">
+  return <footer className="" id="footer" tabindex="0">
       <div className="d-flex flex-column align-items-center py-3">
           <span>Công ty TNHH Onakasuita</span>
           <span>Địa chỉ: D9 Số 1 Đại Cồ Việt, Quận Hai Bà Trưng, Hà Nội. </span>

@@ -1,4 +1,4 @@
-import db from "./firebase";
+import db, {firebase} from "./firebase";
 
 const getReviews = async () => {
   try {
@@ -40,11 +40,11 @@ const getReviewComments = async (id) => {
     throw err;
   }
 };
-const createReview = async ({ title, content, createdAt, userId }) => {
+const createReview = async ({ title, content, userId, thumbnail }) => {
   try {
     const status = await db
       .collection("reviews")
-      .add({ title, content, createdAt, userId });
+      .add({ title, content, createdAt: firebase.firestore.FieldValue.serverTimestamp(), userId, thumbnail });
     console.log(status);
   } catch (err) {
     throw err;

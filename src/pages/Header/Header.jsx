@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./index.scss";
 import logo from "../../assets/images/logo2.png";
-import { Modal, Button } from "react-bootstrap";
 import SignIn from "../../components/SignIn/SignIn";
 import { auth, getUserById } from "../../lib/api/user";
 
-export default function Header({}) {
+export default function Header({handleShow}) {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -37,26 +36,32 @@ export default function Header({}) {
                 <a href="/review-list">REVIEW LIST</a>
               </dd>
               <dd>
-                <a href="/new-review">CREATE REVIEW</a>
+                <a href="/new-review" onClick={(e)=>{
+                  if(!currentUser){
+                    e.preventDefault()
+                    handleShow()
+                  }
+                }}>CREATE REVIEW</a>
               </dd>
               <dd>
-                <a href="#">CONTACT US</a>
+                <a href="#footer">CONTACT US</a>
               </dd>
+              {currentUser && currentUser.admin ? (
+                <dd>
+                  <a href="/admin">ADMIN</a>
+                </dd>
+              ) : (
+                ""
+              )}
             </dl>
           </div>
           <div className="col-4 header-user">
             <div className="d-flex justify-content-end ">
               <div className="me-4">
                 {currentUser ? (
-                  currentUser.admin ? (
-                    <a href="/admin">
-                      <span>Welcome admin</span>
-                    </a>
-                  ) : (
-                    <a href="/admin">
-                      <span>Welcome {currentUser.username}</span>
-                    </a>
-                  )
+                  <a href={`/user-profile/${currentUser.id}`}>
+                    <span>Welcome {currentUser.username}</span>
+                  </a>
                 ) : (
                   ""
                 )}
