@@ -18,10 +18,14 @@ import SignIn from "./components/SignIn/SignIn";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [show, setShow] = useState(false);
-  const handleClose = () => {console.log("handle close"); setShow(false)};
+  const handleClose = () => {
+    console.log("handle close");
+    setShow(false);
+  };
   const handleShow = () => {
     console.log("handle show");
-    setShow(true)};
+    setShow(true);
+  };
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
@@ -32,6 +36,16 @@ function App() {
       setCurrentUser(newUser);
     });
   }, []);
+
+  useEffect(() => {
+    if (currentUser && currentUser.block === true) {
+      alert("You are being blocked!!! Please contact admin");
+      setTimeout(() => {
+        auth.signOut();
+        window.location = "/";
+      }, 1000);
+    }
+  }, [currentUser]);
 
   const logout = () => {
     auth.signOut();
@@ -72,9 +86,11 @@ function App() {
             <UserProfile />
           </Route>
 
-          {currentUser && <Route exact path="/new-review">
-            <NewReview handleShow={handleShow} currentUser={currentUser}/>
-          </Route>}
+          {currentUser && (
+            <Route exact path="/new-review">
+              <NewReview handleShow={handleShow} currentUser={currentUser} />
+            </Route>
+          )}
 
           {/* <Route
             exact
@@ -89,7 +105,7 @@ function App() {
             <ReviewList />
           </Route>
 
-          <Route exact path="/review-detail/:id" >
+          <Route exact path="/review-detail/:id">
             <ReviewDetail handleShow={handleShow} />
           </Route>
 
