@@ -12,9 +12,17 @@ import ReviewDetail from "./pages/ReviewDetail/ReviewDetail";
 import Test from "./lib/api/Test";
 import { auth, storeUserInfo } from "./lib/api/user";
 import { useEffect, useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import SignIn from "./components/SignIn/SignIn";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [show, setShow] = useState(false);
+  const handleClose = () => {console.log("handle close"); setShow(false)};
+  const handleShow = () => {
+    console.log("handle show");
+    setShow(true)};
+
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       let newUser = null;
@@ -31,7 +39,20 @@ function App() {
 
   return (
     <Router>
-      <Header currentUser={currentUser}></Header>
+      <Header currentUser={currentUser} handleShow={handleShow}></Header>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Alert</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You need to login in order to create review !</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <SignIn currentUser={currentUser} />
+        </Modal.Footer>
+      </Modal>
 
       <div className="main-content">
         <Switch>
@@ -51,9 +72,18 @@ function App() {
             <UserProfile />
           </Route>
 
-          <Route exact path="/new-review">
-            <NewReview />
-          </Route>
+          {currentUser && <Route exact path="/new-review">
+            <NewReview handleShow={handleShow} currentUser={currentUser}/>
+          </Route>}
+
+          {/* <Route
+            exact
+            path="/new-review"
+            render={() => {
+              handleShow()
+              return <Home />;
+            }}
+          /> */}
 
           <Route exact path="/review-list">
             <ReviewList />
