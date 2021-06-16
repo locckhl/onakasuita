@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./index.scss";
 import logo from "../../assets/images/logo2.png";
-import { Modal, Button } from "react-bootstrap";
 import SignIn from "../../components/SignIn/SignIn";
 import { auth, getUserById } from "../../lib/api/user";
 
-export default function Header({}) {
+export default function Header({handleShow}) {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -37,7 +36,12 @@ export default function Header({}) {
                 <a href="/review-list">REVIEW LIST</a>
               </dd>
               <dd>
-                <a href="/new-review">CREATE REVIEW</a>
+                <a href="/new-review" onClick={(e)=>{
+                  if(!currentUser){
+                    e.preventDefault()
+                    handleShow()
+                  }
+                }}>CREATE REVIEW</a>
               </dd>
               <dd>
                 <a href="#">CONTACT US</a>

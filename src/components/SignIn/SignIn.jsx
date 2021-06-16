@@ -6,6 +6,8 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { uiConfig, auth } from "../../lib/api/user";
 // import {auth} from "../../lib/api/firebase";
 
+import { Redirect } from "react-router";
+
 export default function SignIn({currentUser}) {
   const [show, setShow] = useState(false);
 
@@ -14,6 +16,7 @@ export default function SignIn({currentUser}) {
 
   const logout = () => {
     auth.signOut();
+    window.location = "/"
   };
 
   if(currentUser) return  <button class="btn btn-primary" onClick={logout} > Logout</button>
@@ -33,9 +36,6 @@ export default function SignIn({currentUser}) {
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Sign In
           </Button>
         </Modal.Footer>
       </Modal>

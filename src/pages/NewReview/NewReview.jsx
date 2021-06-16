@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { createReview } from "../../lib/api/reviews";
@@ -6,7 +6,9 @@ import { createReview } from "../../lib/api/reviews";
 import "./index.scss";
 import { auth, uploadImage } from "../../lib/api/user";
 import MyCustomUploadAdapterPlugin from "../../lib/custom/MyUploadAdapter";
-export default function NewReview() {
+import { Redirect } from "react-router";
+
+export default function NewReview({handleShow, currentUser}) {
   const [userId, setUserId] = useState(null);
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
@@ -20,7 +22,10 @@ export default function NewReview() {
       if (content === null || content === undefined) {
         throw new Error("内容を入力してください");
       }
-      if (thumbnailInput.current.files[0] === null || thumbnailInput.current.files[0] === undefined) {
+      if (
+        thumbnailInput.current.files[0] === null ||
+        thumbnailInput.current.files[0] === undefined
+      ) {
         throw new Error("イメージをアップロードしてください");
       }
       const thumbnail = await uploadImage(thumbnailInput.current.files[0]);
@@ -36,7 +41,13 @@ export default function NewReview() {
       alert(err);
     }
   };
-  return (
+
+  // if (currentUser === null) {
+  //   handleShow()
+  //   return <Redirect to="/" />
+
+  // }
+  return currentUser && (
     <div className="review py-5">
       <div className="fs-2">Create new review</div>
 
