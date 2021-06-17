@@ -80,6 +80,7 @@ export default function Table(props) {
               <th scope="col">UserName</th>
               <th scope="col">Phone</th>
               <th scope="col">Email</th>
+              <th scope="col">Is Admin</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -95,6 +96,7 @@ export default function Table(props) {
                   </td>
                   <td>{value.phone}</td>
                   <td>{value.email}</td>
+                  <td>{value.admin ? "True" : "False"}</td>
                   <td>
                     {value.block ? (
                       <button
