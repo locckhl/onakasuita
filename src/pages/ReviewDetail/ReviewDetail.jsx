@@ -6,10 +6,11 @@ import CommentForm from "../../components/CommentForm/CommentForm";
 import { useParams } from "react-router";
 import { useLocation } from "react-router-dom";
 import { getReviewById, getReviewComments } from "../../lib/api/reviews";
-import { getUserById } from "../../lib/api/user";
+import { auth, getUserById } from "../../lib/api/user";
 import { createComment } from "../../lib/api/comment";
 import parse from "html-react-parser";
 import Skeleton from "react-loading-skeleton";
+import ReviewEdit from "../../components/ReviewEdit/ReviewEdit";
 
 export default function ReviewDetail({ handleShow, location }) {
   const [review, setReview] = useState(null);
@@ -116,7 +117,7 @@ export default function ReviewDetail({ handleShow, location }) {
         </div>
         <div className="review-info__right d-flex">
           <div className="row flex-column">
-            <span className="author-name fs-3 col">{author.username}</span>
+            <span className="author-name fs-3 col">{author.username}</span> 
             <div className="d-flex col">
               <div className="review-date me-3">
                 {new Date(review.createdAt.seconds * 1000).toLocaleString()}{" "}
@@ -125,6 +126,13 @@ export default function ReviewDetail({ handleShow, location }) {
                 <a href="#comments">{reviewComments.length} comments</a>
               </div>
             </div>
+            {auth.currentUser && author.id === auth.currentUser.uid ? (
+                  <ReviewEdit review={review}/>
+                ) : (
+                  ""
+                )}
+            
+
           </div>
         </div>
       </div>
