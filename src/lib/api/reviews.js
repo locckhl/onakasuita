@@ -18,7 +18,7 @@ const getReviewById = async (id) => {
   try {
     const item = await db.doc(`reviews/${id}`).get();
     // console.log(item)
-    return item.data();
+    return {...item.data(), id:item.id};
   } catch (err) {
     throw err;
   }
@@ -52,6 +52,35 @@ const createReview = async ({ title, content, userId, thumbnail }) => {
   }
 };
 
+const updateReview = async ({ id, title, content, thumbnail }) => {
+  try {
+    const userDoc = await db.collection("reviews").doc(id).get();
+    console.log("userdoc", userDoc);
+    if (userDoc.exists) {
+      if(thumbnail !== null && thumbnail !== undefined){
+        await db
+        .collection("reviews")
+        .doc(id)
+        .update({ ...userDoc.data(), title, content, thumbnail });
+      }
+      else{
+        await db
+        .collection("reviews")
+        .doc(id)
+        .update({ ...userDoc.data(), title, content });
+      }
+     
+    }
+    else{
+      return false
+    }
+    return true;
+  } catch (err) {
+    console.log("UPDATE REVIEW ERR",err);
+    return false;
+  }
+};
+
 const deleteReview = async (id) => {
   try {
     const status = await db.doc(`reviews/${id}`).delete();
@@ -67,4 +96,5 @@ export {
   getReviewComments,
   createReview,
   deleteReview,
+  updateReview
 };
