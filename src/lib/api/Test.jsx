@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Counter } from "../../features/counter/Counter";
 import { createComment, deleteComment, getCommentById, getComments } from "./comment";
 import db, { firebase } from "./firebase";
 import {
@@ -71,6 +72,8 @@ export default function Test() {
 
   return (
     <div className="container">
+
+      <Counter />
       {data.map((item) => (
         <div>
           ID:{item.id}, Date: {item.createdAt.seconds}, title:{item.title},
