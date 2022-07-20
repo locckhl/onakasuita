@@ -7,6 +7,7 @@ import { getReviews } from "../../lib/api/reviews";
 import { getComments } from "../../lib/api/comment";
 import NF404 from "../../components/NF404/NF404";
 import Skeleton from "react-loading-skeleton";
+import { Helmet } from "react-helmet";
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState(1);
@@ -40,6 +41,9 @@ export default function Admin() {
   if (!currentUser)
     return (
       <div className="container-fluid my-5">
+        <Helmet>
+          <title>Admin</title>
+        </Helmet>
         <div className="row">
           <div className="col-2 admin-navbar">
             <nav className={"navabar-list d-flex flex-column "}>
@@ -90,7 +94,6 @@ export default function Admin() {
             </nav>
           </div>
 
-
           <div className="col-10 admin-content px-5">
             <div className={activeTab === 1 ? "d-block" : "d-none"} id="tab-1">
               <div className="dashboard">
@@ -99,9 +102,7 @@ export default function Admin() {
                 </div>
                 <div className="dashboard-body gy-1 my-4 row">
                   {/* Users */}
-                  <div
-                    className="col-4 dashboard-item d-flex "
-                  >
+                  <div className="col-4 dashboard-item d-flex ">
                     <div className=" dashboard-item__image text-center me-4">
                       <i class="fas fa-users fs-2"></i>
                     </div>
@@ -109,15 +110,15 @@ export default function Admin() {
                     <div className=" dashboard-item__content ">
                       <div className="row flex-column">
                         <div className="col ">User</div>
-                        <div className="col fs-2"><Skeleton /></div>
+                        <div className="col fs-2">
+                          <Skeleton />
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Reviews */}
-                  <div
-                    className="col-4 dashboard-item d-flex "
-                  >
+                  <div className="col-4 dashboard-item d-flex ">
                     <div className=" dashboard-item__image text-center me-4">
                       <i class="far fa-clipboard fs-2"></i>
                     </div>
@@ -125,15 +126,15 @@ export default function Admin() {
                     <div className=" dashboard-item__content ">
                       <div className="row flex-column">
                         <div className="col ">Reviews</div>
-                        <div className="col fs-2"><Skeleton /></div>
+                        <div className="col fs-2">
+                          <Skeleton />
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Comments */}
-                  <div
-                    className="col-4 dashboard-item d-flex "
-                  >
+                  <div className="col-4 dashboard-item d-flex ">
                     <div className=" dashboard-item__image text-center me-4">
                       <i class="far fa-comment fs-2"></i>
                     </div>
@@ -141,7 +142,9 @@ export default function Admin() {
                     <div className=" dashboard-item__content ">
                       <div className="row flex-column">
                         <div className="col ">Comments</div>
-                        <div className="col fs-2"><Skeleton /></div>
+                        <div className="col fs-2">
+                          <Skeleton />
+                        </div>
                       </div>
                     </div>
                   </div>

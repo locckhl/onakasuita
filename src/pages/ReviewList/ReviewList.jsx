@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./index.scss";
 import ReviewItemList from "../../components/ReviewItemList/ReviewItemList";
 import { getReviews } from "../../lib/api/reviews";
+import { Helmet } from "react-helmet";
+
 export default function ReviewList() {
   const [reviews, setReviews] = useState([])
   const [searchInput, setSearchInput] = useState("")
@@ -40,6 +42,9 @@ export default function ReviewList() {
 
   return (
     <div className="container my-5 overflow-hidden">
+      <Helmet>
+          <title>Review List</title>
+        </Helmet>
       <div className="new-review-list__header fs-1 text-center my-3">
         Review list
       </div>

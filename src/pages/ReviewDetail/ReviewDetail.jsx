@@ -11,6 +11,7 @@ import { createComment } from "../../lib/api/comment";
 import parse from "html-react-parser";
 import Skeleton from "react-loading-skeleton";
 import ReviewEdit from "../../components/ReviewEdit/ReviewEdit";
+import { Helmet } from "react-helmet";
 
 export default function ReviewDetail({ handleShow, location }) {
   const [review, setReview] = useState(null);
@@ -62,6 +63,9 @@ export default function ReviewDetail({ handleShow, location }) {
   if (!review || !author || !reviewComments)
     return (
       <div className="review-container my-3 py-3">
+        <Helmet>
+          <title>ReviewDetail</title>
+        </Helmet>
         <div className="rewview-header fs-1">
           <Skeleton count="3" />
         </div>
@@ -117,7 +121,7 @@ export default function ReviewDetail({ handleShow, location }) {
         </div>
         <div className="review-info__right d-flex">
           <div className="row flex-column">
-            <span className="author-name fs-3 col">{author.username}</span> 
+            <span className="author-name fs-3 col">{author.username}</span>
             <div className="d-flex col">
               <div className="review-date me-3">
                 {new Date(review.createdAt.seconds * 1000).toLocaleString()}{" "}
@@ -127,12 +131,10 @@ export default function ReviewDetail({ handleShow, location }) {
               </div>
             </div>
             {auth.currentUser && author.id === auth.currentUser.uid ? (
-                  <ReviewEdit review={review}/>
-                ) : (
-                  ""
-                )}
-            
-
+              <ReviewEdit review={review} />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

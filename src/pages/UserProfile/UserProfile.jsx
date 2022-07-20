@@ -5,6 +5,7 @@ import "./index.scss";
 import nano from "../../assets/images/nano.jpg";
 import UserEdit from "../../components/UserEdit/UserEdit";
 import ReviewItemList from "../../components/ReviewItemList/ReviewItemList";
+import { Helmet } from "react-helmet";
 
 import {
   auth,
@@ -47,25 +48,34 @@ export default function UserProfile() {
   if (!user || !userComments || !userReviews)
     return (
       <div className="py-5">
+        <Helmet>
+          <title>User Profile</title>
+        </Helmet>
         <div className="container ">
           <div className="row gx-5">
             <div className="col-5 avatar">
               <div className="avatar-container float-end">
-                <Skeleton count="10"/>
+                <Skeleton count="10" />
               </div>
             </div>
             <div className="col-7 info">
               <div className="row">
-                <div className="col-5 fs-2"><Skeleton /></div>
-                <div className="col d-flex align-items-center">
-                 
+                <div className="col-5 fs-2">
+                  <Skeleton />
                 </div>
+                <div className="col d-flex align-items-center"></div>
               </div>
-              <div className="row mb-2 ps-3">Email: <Skeleton /></div>
+              <div className="row mb-2 ps-3">
+                Email: <Skeleton />
+              </div>
 
-              <div className="row mb-2 ps-3">Phone: <Skeleton /></div>
+              <div className="row mb-2 ps-3">
+                Phone: <Skeleton />
+              </div>
 
-              <div className="row mb-2 ps-3">Reviews: <Skeleton /></div>
+              <div className="row mb-2 ps-3">
+                Reviews: <Skeleton />
+              </div>
 
               <div className="row mb-2 ps-3">
                 Comments: <Skeleton />
@@ -80,7 +90,7 @@ export default function UserProfile() {
             </div>
 
             <div className="review-item-list-container">
-            <Skeleton count="20"/>
+              <Skeleton count="20" />
             </div>
           </div>
         </div>
