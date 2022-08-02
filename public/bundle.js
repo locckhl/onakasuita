@@ -17616,11 +17616,9 @@ var getVisitorId = function () { return tslib_es6_awaiter(void 0, void 0, void 0
 }); };
 /* harmony default export */ const refactor = (getVisitorId);
 
-;// CONCATENATED MODULE: ./src/events/startSession.ts
-
-
-
-
+;// CONCATENATED MODULE: ./src/events/defaultData.ts
+var oneSession = 10 * 60 * 1000; // in miliseconds
+// Get browser name and it's version
 var nVer = navigator.appVersion;
 var nAgt = navigator.userAgent;
 var browserName = navigator.appName;
@@ -17678,32 +17676,48 @@ if (isNaN(majorVersion)) {
     fullVersion = "" + parseFloat(navigator.appVersion);
     majorVersion = parseInt(navigator.appVersion, 10);
 }
+// Get os name
+var OSName = "Unknown OS";
+if (navigator.appVersion.indexOf("Win") != -1)
+    OSName = "Windows";
+if (navigator.appVersion.indexOf("Mac") != -1)
+    OSName = "MacOS";
+if (navigator.appVersion.indexOf("X11") != -1)
+    OSName = "UNIX";
+if (navigator.appVersion.indexOf("Linux") != -1)
+    OSName = "Linux";
+// Get device cateogory
+var deviceCategory = "desktop";
+if (/Mobi|Android/i.test(navigator.userAgent)) {
+    deviceCategory = "mobile";
+}
+// Get deviceIsLimitedAdTracking
+var deviceIsLimitedAdTracking = true;
+if (window.navigator.doNotTrack === null)
+    deviceIsLimitedAdTracking = false;
+
+
+;// CONCATENATED MODULE: ./src/events/startSession.ts
+
+
+
+
+
 var sessionStart = function (projectId) { return tslib_es6_awaiter(void 0, void 0, void 0, function () {
-    var oneSession, sessionID, visitorId, OSName, deviceIsLimitedAdTracking, event_value, deviceCategory, response, error_1;
+    var sessionID, visitorId, event_value, response, error_1;
     return tslib_es6_generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                oneSession = 100;
+                console.log("Checking new session");
                 sessionID = window.localStorage.getItem("sessionID");
                 if (!(!sessionID ||
-                    Date.now() / 1000 - parseInt(sessionID) / 1000 > oneSession)) return [3 /*break*/, 5];
+                    Date.now() - parseInt(sessionID) > oneSession)) return [3 /*break*/, 5];
                 sessionID = Date.now().toString();
+                console.log("Started new session:", sessionID);
                 window.localStorage.setItem("sessionID", sessionID);
                 return [4 /*yield*/, refactor()];
             case 1:
                 visitorId = _a.sent();
-                OSName = "Unknown OS";
-                if (navigator.appVersion.indexOf("Win") != -1)
-                    OSName = "Windows";
-                if (navigator.appVersion.indexOf("Mac") != -1)
-                    OSName = "MacOS";
-                if (navigator.appVersion.indexOf("X11") != -1)
-                    OSName = "UNIX";
-                if (navigator.appVersion.indexOf("Linux") != -1)
-                    OSName = "Linux";
-                deviceIsLimitedAdTracking = true;
-                if (window.navigator.doNotTrack === null)
-                    deviceIsLimitedAdTracking = false;
                 _a.label = 2;
             case 2:
                 _a.trys.push([2, 4, , 5]);
@@ -17713,10 +17727,6 @@ var sessionStart = function (projectId) { return tslib_es6_awaiter(void 0, void 
                     page_title: document.title,
                     page_location: window.location.pathname,
                 };
-                deviceCategory = "desktop";
-                if (/Mobi|Android/i.test(navigator.userAgent)) {
-                    deviceCategory = "mobile";
-                }
                 return [4 /*yield*/, src_client.mutate({
                         mutation: addEvent,
                         variables: {
@@ -17755,72 +17765,15 @@ var sessionStart = function (projectId) { return tslib_es6_awaiter(void 0, void 
 
 
 
-var pageView_nVer = navigator.appVersion;
-var pageView_nAgt = navigator.userAgent;
-var pageView_browserName = navigator.appName;
-var pageView_fullVersion = "" + parseFloat(navigator.appVersion);
-var pageView_majorVersion = parseInt(navigator.appVersion, 10);
-var pageView_nameOffset, pageView_verOffset, pageView_ix;
-// In Opera, the true version is after "Opera" or after "Version"
-if ((pageView_verOffset = pageView_nAgt.indexOf("Opera")) != -1) {
-    pageView_browserName = "Opera";
-    pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 6);
-    if ((pageView_verOffset = pageView_nAgt.indexOf("Version")) != -1)
-        pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 8);
-}
-// In MSIE, the true version is after "MSIE" in userAgent
-else if ((pageView_verOffset = pageView_nAgt.indexOf("MSIE")) != -1) {
-    pageView_browserName = "Microsoft Internet Explorer";
-    pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 5);
-}
-else if ((pageView_verOffset = pageView_nAgt.indexOf("Edg")) != -1) {
-    pageView_browserName = "Edge";
-    pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 4);
-}
-// In Chrome, the true version is after "Chrome"
-else if ((pageView_verOffset = pageView_nAgt.indexOf("Chrome")) != -1) {
-    pageView_browserName = "Chrome";
-    pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 7);
-}
-// In Safari, the true version is after "Safari" or after "Version"
-else if ((pageView_verOffset = pageView_nAgt.indexOf("Safari")) != -1) {
-    pageView_browserName = "Safari";
-    pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 7);
-    if ((pageView_verOffset = pageView_nAgt.indexOf("Version")) != -1)
-        pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 8);
-}
-// In Firefox, the true version is after "Firefox"
-else if ((pageView_verOffset = pageView_nAgt.indexOf("Firefox")) != -1) {
-    pageView_browserName = "Firefox";
-    pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 8);
-}
-// In most other browsers, "name/version" is at the end of userAgent
-else if ((pageView_nameOffset = pageView_nAgt.lastIndexOf(" ") + 1) < (pageView_verOffset = pageView_nAgt.lastIndexOf("/"))) {
-    pageView_browserName = pageView_nAgt.substring(pageView_nameOffset, pageView_verOffset);
-    pageView_fullVersion = pageView_nAgt.substring(pageView_verOffset + 1);
-    if (pageView_browserName.toLowerCase() == pageView_browserName.toUpperCase()) {
-        pageView_browserName = navigator.appName;
-    }
-}
-// trim the fullVersion string at semicolon/space if present
-if ((pageView_ix = pageView_fullVersion.indexOf(";")) != -1)
-    pageView_fullVersion = pageView_fullVersion.substring(0, pageView_ix);
-if ((pageView_ix = pageView_fullVersion.indexOf(" ")) != -1)
-    pageView_fullVersion = pageView_fullVersion.substring(0, pageView_ix);
-pageView_majorVersion = parseInt("" + pageView_fullVersion, 10);
-if (isNaN(pageView_majorVersion)) {
-    pageView_fullVersion = "" + parseFloat(navigator.appVersion);
-    pageView_majorVersion = parseInt(navigator.appVersion, 10);
-}
+
 var paegView = function (projectId) { return tslib_es6_awaiter(void 0, void 0, void 0, function () {
-    var oneSession, sessionID, visitorId, OSName, deviceIsLimitedAdTracking, event_value, deviceCategory, response, error_1;
+    var sessionID, visitorId, event_value, response, error_1;
     return tslib_es6_generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                oneSession = 100;
                 sessionID = window.localStorage.getItem("sessionID");
                 if (!(!sessionID ||
-                    Date.now() / 1000 - parseInt(sessionID) / 1000 > oneSession)) return [3 /*break*/, 2];
+                    Date.now() - parseInt(sessionID) > oneSession)) return [3 /*break*/, 2];
                 return [4 /*yield*/, startSession(projectId)];
             case 1:
                 sessionID = _a.sent();
@@ -17830,18 +17783,6 @@ var paegView = function (projectId) { return tslib_es6_awaiter(void 0, void 0, v
                 return [4 /*yield*/, refactor()];
             case 3:
                 visitorId = _a.sent();
-                OSName = "Unknown OS";
-                if (navigator.appVersion.indexOf("Win") != -1)
-                    OSName = "Windows";
-                if (navigator.appVersion.indexOf("Mac") != -1)
-                    OSName = "MacOS";
-                if (navigator.appVersion.indexOf("X11") != -1)
-                    OSName = "UNIX";
-                if (navigator.appVersion.indexOf("Linux") != -1)
-                    OSName = "Linux";
-                deviceIsLimitedAdTracking = true;
-                if (window.navigator.doNotTrack === null)
-                    deviceIsLimitedAdTracking = false;
                 _a.label = 4;
             case 4:
                 _a.trys.push([4, 6, , 7]);
@@ -17851,10 +17792,6 @@ var paegView = function (projectId) { return tslib_es6_awaiter(void 0, void 0, v
                     page_title: document.title,
                     page_location: window.location.pathname,
                 };
-                deviceCategory = "desktop";
-                if (/Mobi|Android/i.test(navigator.userAgent)) {
-                    deviceCategory = "mobile";
-                }
                 return [4 /*yield*/, src_client.mutate({
                         mutation: addEvent,
                         variables: {
@@ -17866,8 +17803,8 @@ var paegView = function (projectId) { return tslib_es6_awaiter(void 0, void 0, v
                             deviceIsLimitedAdTracking: deviceIsLimitedAdTracking,
                             deviceLanguage: window.navigator.language,
                             deviceOperatingSystem: OSName,
-                            deviceBrowser: pageView_browserName,
-                            deviceBrowserVersion: pageView_fullVersion,
+                            deviceBrowser: browserName,
+                            deviceBrowserVersion: fullVersion,
                             sessionId: sessionID,
                             projectId: projectId,
                             // referrer: document.referrer
@@ -20509,6 +20446,7 @@ function isSupportedBrowser() {
 
 
 
+
 var getComponents = sources_loadBuiltinSources({ debug: true });
 var test = function () { return __awaiter(void 0, void 0, void 0, function () {
     var result;
@@ -20585,7 +20523,9 @@ function startApp() {
                     console.log(projectIdRes);
                     projectId_1 = parseInt(projectIdRes.data.getProjectIdByOrigin);
                     console.log("projectId", projectId_1);
-                    startSession(projectId_1);
+                    setInterval(function () {
+                        startSession(projectId_1);
+                    }, oneSession / 10);
                     previousUrl = "";
                     observer = new MutationObserver(function (mutations) {
                         console.log("alive");
