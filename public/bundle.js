@@ -15022,7 +15022,7 @@ gql["default"] = gql;
 ;// CONCATENATED MODULE: ./src/graphql/addEvent.ts
 
 
-var ADD_EVEMT = gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n mutation AddEvent($userId: ID!, $eventDate: Date!, $eventName: EventName!, $projectId: ID!, $username: String, $name: String, $sessionId: String, $eventValue: JSON!, $deviceCategory: String, $deviceMobileModelName: String, $deviceMobileBrandName: String, $deviceOperatingSystem: String, $deviceOperatingSystemVersion: String, $deviceVendorId: String, $deviceAdvertisingId: String, $deviceLanguage: String, $deviceIsLimitedAdTracking: Boolean, $geoContinent: String, $ipAddress: String, $deviceBrowserVersion: String, $deviceBrowser: String, $deviceTimeZone: String, $geoCountry: String, $geoRegion: String, $geoCity: String, $geoSubContinent: String, $referrer: String) {\n  addEvent(userID: $userId, event_date: $eventDate, event_name: $eventName, ProjectId: $projectId, username: $username, name: $name, session_id: $sessionId, event_value: $eventValue, device_category: $deviceCategory, device_mobile_model_name: $deviceMobileModelName, device_mobile_brand_name: $deviceMobileBrandName, device_operating_system: $deviceOperatingSystem, device_operating_system_version: $deviceOperatingSystemVersion, device_vendor_id: $deviceVendorId, device_advertising_id: $deviceAdvertisingId, device_language: $deviceLanguage, device_is_limited_ad_tracking: $deviceIsLimitedAdTracking, geo_continent: $geoContinent, ip_address: $ipAddress, device_browser_version: $deviceBrowserVersion, device_browser: $deviceBrowser, device_time_zone: $deviceTimeZone, geo_country: $geoCountry, geo_region: $geoRegion, geo_city: $geoCity, geo_sub_continent: $geoSubContinent, referrer: $referrer)\n}\n"], ["\n mutation AddEvent($userId: ID!, $eventDate: Date!, $eventName: EventName!, $projectId: ID!, $username: String, $name: String, $sessionId: String, $eventValue: JSON!, $deviceCategory: String, $deviceMobileModelName: String, $deviceMobileBrandName: String, $deviceOperatingSystem: String, $deviceOperatingSystemVersion: String, $deviceVendorId: String, $deviceAdvertisingId: String, $deviceLanguage: String, $deviceIsLimitedAdTracking: Boolean, $geoContinent: String, $ipAddress: String, $deviceBrowserVersion: String, $deviceBrowser: String, $deviceTimeZone: String, $geoCountry: String, $geoRegion: String, $geoCity: String, $geoSubContinent: String, $referrer: String) {\n  addEvent(userID: $userId, event_date: $eventDate, event_name: $eventName, ProjectId: $projectId, username: $username, name: $name, session_id: $sessionId, event_value: $eventValue, device_category: $deviceCategory, device_mobile_model_name: $deviceMobileModelName, device_mobile_brand_name: $deviceMobileBrandName, device_operating_system: $deviceOperatingSystem, device_operating_system_version: $deviceOperatingSystemVersion, device_vendor_id: $deviceVendorId, device_advertising_id: $deviceAdvertisingId, device_language: $deviceLanguage, device_is_limited_ad_tracking: $deviceIsLimitedAdTracking, geo_continent: $geoContinent, ip_address: $ipAddress, device_browser_version: $deviceBrowserVersion, device_browser: $deviceBrowser, device_time_zone: $deviceTimeZone, geo_country: $geoCountry, geo_region: $geoRegion, geo_city: $geoCity, geo_sub_continent: $geoSubContinent, referrer: $referrer)\n}\n"])));
+var ADD_EVEMT = gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n mutation AddEvent($userId: ID!, $eventDate: Date!, $eventName: EventName!, $projectId: ID!, $username: String, $name: String, $sessionId: String, $eventValue: JSON!, $deviceCategory: String, $deviceMobileModelName: String, $deviceMobileBrandName: String, $deviceOperatingSystem: String, $deviceOperatingSystemVersion: String, $deviceVendorId: String, $deviceAdvertisingId: String, $deviceLanguage: String, $deviceIsLimitedAdTracking: Boolean, $geoContinent: String, $ipAddress: String, $deviceBrowserVersion: String, $deviceBrowser: String, $deviceTimeZone: String, $geoCountry: String, $geoRegion: String, $geoCity: String, $geoSubContinent: String, $referrer: String, $deviceResolution: String, $userAgent: String!) {\n  addEvent(userID: $userId, event_date: $eventDate, event_name: $eventName, ProjectId: $projectId, username: $username, name: $name, session_id: $sessionId, event_value: $eventValue, device_category: $deviceCategory, device_mobile_model_name: $deviceMobileModelName, device_mobile_brand_name: $deviceMobileBrandName, device_operating_system: $deviceOperatingSystem, device_operating_system_version: $deviceOperatingSystemVersion, device_vendor_id: $deviceVendorId, device_advertising_id: $deviceAdvertisingId, device_language: $deviceLanguage, device_is_limited_ad_tracking: $deviceIsLimitedAdTracking, geo_continent: $geoContinent, ip_address: $ipAddress, device_browser_version: $deviceBrowserVersion, device_browser: $deviceBrowser, device_time_zone: $deviceTimeZone, geo_country: $geoCountry, geo_region: $geoRegion, geo_city: $geoCity, geo_sub_continent: $geoSubContinent, referrer: $referrer, device_resolution: $deviceResolution, userAgent: $userAgent)\n}\n"], ["\n mutation AddEvent($userId: ID!, $eventDate: Date!, $eventName: EventName!, $projectId: ID!, $username: String, $name: String, $sessionId: String, $eventValue: JSON!, $deviceCategory: String, $deviceMobileModelName: String, $deviceMobileBrandName: String, $deviceOperatingSystem: String, $deviceOperatingSystemVersion: String, $deviceVendorId: String, $deviceAdvertisingId: String, $deviceLanguage: String, $deviceIsLimitedAdTracking: Boolean, $geoContinent: String, $ipAddress: String, $deviceBrowserVersion: String, $deviceBrowser: String, $deviceTimeZone: String, $geoCountry: String, $geoRegion: String, $geoCity: String, $geoSubContinent: String, $referrer: String, $deviceResolution: String, $userAgent: String!) {\n  addEvent(userID: $userId, event_date: $eventDate, event_name: $eventName, ProjectId: $projectId, username: $username, name: $name, session_id: $sessionId, event_value: $eventValue, device_category: $deviceCategory, device_mobile_model_name: $deviceMobileModelName, device_mobile_brand_name: $deviceMobileBrandName, device_operating_system: $deviceOperatingSystem, device_operating_system_version: $deviceOperatingSystemVersion, device_vendor_id: $deviceVendorId, device_advertising_id: $deviceAdvertisingId, device_language: $deviceLanguage, device_is_limited_ad_tracking: $deviceIsLimitedAdTracking, geo_continent: $geoContinent, ip_address: $ipAddress, device_browser_version: $deviceBrowserVersion, device_browser: $deviceBrowser, device_time_zone: $deviceTimeZone, geo_country: $geoCountry, geo_region: $geoRegion, geo_city: $geoCity, geo_sub_continent: $geoSubContinent, referrer: $referrer, device_resolution: $deviceResolution, userAgent: $userAgent)\n}\n"])));
 /* harmony default export */ const addEvent = (ADD_EVEMT);
 var templateObject_1;
 
@@ -17686,6 +17686,8 @@ if (navigator.appVersion.indexOf("X11") != -1)
     OSName = "UNIX";
 if (navigator.appVersion.indexOf("Linux") != -1)
     OSName = "Linux";
+if (navigator.appVersion.indexOf("Linux") != -1)
+    OSName = "Linux";
 // Get device cateogory
 var deviceCategory = "desktop";
 if (/Mobi|Android/i.test(navigator.userAgent)) {
@@ -17695,6 +17697,7 @@ if (/Mobi|Android/i.test(navigator.userAgent)) {
 var deviceIsLimitedAdTracking = true;
 if (window.navigator.doNotTrack === null)
     deviceIsLimitedAdTracking = false;
+var resolution = "".concat(window.screen.width, "x").concat(window.screen.height);
 
 
 ;// CONCATENATED MODULE: ./src/events/startSession.ts
@@ -17721,7 +17724,6 @@ var sessionStart = function (projectId) { return tslib_es6_awaiter(void 0, void 
                 _a.label = 2;
             case 2:
                 _a.trys.push([2, 4, , 5]);
-                // console.log("addEvent", addEvent);
                 console.log("Recored Session");
                 event_value = {
                     page_title: document.title,
@@ -17733,16 +17735,14 @@ var sessionStart = function (projectId) { return tslib_es6_awaiter(void 0, void 
                             eventDate: Date.now(),
                             eventName: "session_start",
                             eventValue: event_value,
-                            deviceCategory: deviceCategory,
                             userId: visitorId,
                             deviceIsLimitedAdTracking: deviceIsLimitedAdTracking,
                             deviceLanguage: window.navigator.language,
-                            deviceOperatingSystem: OSName,
-                            deviceBrowser: browserName,
-                            deviceBrowserVersion: fullVersion,
                             sessionId: sessionID,
                             referrer: document.referrer,
                             projectId: projectId,
+                            deviceResolution: resolution,
+                            userAgent: window.navigator.userAgent
                         },
                     })];
             case 3:
@@ -17786,7 +17786,6 @@ var paegView = function (projectId) { return tslib_es6_awaiter(void 0, void 0, v
                 _a.label = 4;
             case 4:
                 _a.trys.push([4, 6, , 7]);
-                // console.log("addEvent", addEvent);
                 console.log("Recored pageview");
                 event_value = {
                     page_title: document.title,
@@ -17798,15 +17797,13 @@ var paegView = function (projectId) { return tslib_es6_awaiter(void 0, void 0, v
                             eventDate: Date.now(),
                             eventName: "page_view",
                             eventValue: event_value,
-                            deviceCategory: deviceCategory,
                             userId: visitorId,
                             deviceIsLimitedAdTracking: deviceIsLimitedAdTracking,
                             deviceLanguage: window.navigator.language,
-                            deviceOperatingSystem: OSName,
-                            deviceBrowser: browserName,
-                            deviceBrowserVersion: fullVersion,
                             sessionId: sessionID,
                             projectId: projectId,
+                            deviceResolution: resolution,
+                            userAgent: window.navigator.userAgent
                             // referrer: document.referrer
                         },
                     })];
@@ -20504,7 +20501,7 @@ var beamsTokenProvider = new TokenProvider({
 });
 function startApp() {
     return tslib_es6_awaiter(this, void 0, void 0, function () {
-        var projectIdRes, projectId_1, previousUrl, observer, config, visitorId_1, error_1;
+        var projectIdRes, projectId_1, previousUrl, observer, config, userAgent, visitorId_1, error_1;
         return tslib_es6_generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -20537,13 +20534,28 @@ function startApp() {
                     });
                     config = { subtree: true, childList: true };
                     observer.observe(document, config);
+                    userAgent = window.navigator.userAgent;
                     return [4 /*yield*/, refactor()];
                 case 3:
                     visitorId_1 = _a.sent();
+                    console.log(visitorId_1 + '@' + projectId_1.toString());
                     beamsClient
                         .start()
-                        .then(function () { return beamsClient.setUserId(visitorId_1, beamsTokenProvider); })
-                        .catch(console.error);
+                        .then(function () { return beamsClient.setUserId(visitorId_1 + '@' + projectId_1.toString(), beamsTokenProvider); })
+                        .catch(function (error) {
+                        console.log(error);
+                        if (error.message === 'Changing the `userId` is not allowed.') {
+                            beamsClient.clearAllState()
+                                .then(function () { return console.log('Beams state has been cleared'); }).then(function () {
+                                beamsClient
+                                    .start()
+                                    .then(function () { return beamsClient.setUserId(visitorId_1 + '@' + projectId_1.toString(), beamsTokenProvider); })
+                                    .catch(function (error) {
+                                    console.log(error);
+                                });
+                            }).catch(function (e) { return console.error('Could not clear Beams state', e); });
+                        }
+                    });
                     return [3 /*break*/, 5];
                 case 4:
                     error_1 = _a.sent();
