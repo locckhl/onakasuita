@@ -5760,10 +5760,10 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-fa-package@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/fa-package/-/fa-package-1.0.8.tgz#746d39893aa24150acc3983c05bd7e292243ec89"
-  integrity sha512-zsI+eqZVI1eBFCu5BKeiP+rGiLD3U7THXDtaT+lHlYYl0pHr66bMSzTrIr1pek6WPnqSE57SulLXArEE+633kQ==
+fa-package@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/fa-package/-/fa-package-1.0.9.tgz#8fc2c4c695a661958a3b0a1229fd02cb6d03a60a"
+  integrity sha512-cZdWgkepsPeSTFWwquH7JeDnB1fMBeRxGmXO+WdUjU6Gx1dfY+mTgig9dtJIucaPsu/hmBw/KK68sqX+oCqSgA==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@pusher/push-notifications-web" "^1.1.0"

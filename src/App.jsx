@@ -39,7 +39,7 @@ function App() {
           userProjectId: newUser.id,
           displayName: user.providerData[0].displayName,
           phoneNumber: user.providerData[0].phoneNumber,
-          photoUrl: user.providerData[0].photoUrl,
+          photoUrl: user.providerData[0].photoURL,
           email: user.providerData[0].email,
         });
       }
