@@ -14,6 +14,7 @@ import { auth, storeUserInfo } from "./lib/api/user";
 import { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import SignIn from "./components/SignIn/SignIn";
+import { startApp, unifyUserData } from "fa-package";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -32,6 +33,15 @@ function App() {
       let newUser = null;
       if (user) {
         newUser = await storeUserInfo(user);
+        console.log("newUser, ", newUser);
+        console.log("user, ", user.providerData[0]);
+        await unifyUserData({
+          userProjectId: newUser.id,
+          displayName: user.providerData[0].displayName,
+          phoneNumber: user.providerData[0].phoneNumber,
+          photoUrl: user.providerData[0].photoUrl,
+          email: user.providerData[0].email,
+        });
       }
       setCurrentUser(newUser);
     });
@@ -64,7 +74,7 @@ function App() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <SignIn currentUser={currentUser} />
+          <SignIn currentUser={currentUser} />E
         </Modal.Footer>
       </Modal>
 

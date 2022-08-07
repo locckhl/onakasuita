@@ -12,6 +12,7 @@ export default function Header({handleShow}) {
       let newUser = null;
       if (user) {
         newUser = await getUserById(auth.currentUser.uid);
+        console.log("user:",auth.currentUser)
       }
       setCurrentUser(newUser);
     });
