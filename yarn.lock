@@ -5760,15 +5760,16 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-fa-package@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/fa-package/-/fa-package-1.0.9.tgz#8fc2c4c695a661958a3b0a1229fd02cb6d03a60a"
-  integrity sha512-cZdWgkepsPeSTFWwquH7JeDnB1fMBeRxGmXO+WdUjU6Gx1dfY+mTgig9dtJIucaPsu/hmBw/KK68sqX+oCqSgA==
+fa-package@^1.0.10, fa-package@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/fa-package/-/fa-package-1.1.0.tgz#6a568c37060515ece0e94e6d2601428f30acf9aa"
+  integrity sha512-gGTG455t/kp8SLt52sFkurGpvwPfEjpFImFrK64NUbHOxf0bfzKH3wBILAX9ZR6yWKppsTO+30/KFk11MQXGTg==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@pusher/push-notifications-web" "^1.1.0"
     axios "^0.27.2"
     dotenv "^16.0.1"
+    fa-package "^1.0.10"
     graphql "^16.5.0"
     tslib "^2.4.0"
 
