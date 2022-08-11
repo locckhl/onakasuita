@@ -38,7 +38,8 @@ function App() {
         await unifyUserData({
           userProjectId: newUser.id,
           displayName: user.providerData[0].displayName,
-          phoneNumber: user.providerData[0].phoneNumber,
+          // phoneNumber: user.providerData[0].phoneNumber,
+          phoneNumber: "+84397871858",
           photoUrl: user.providerData[0].photoURL,
           email: user.providerData[0].email,
         });
